@@ -12,7 +12,15 @@ export default class BookDetailScreen extends React.Component {
                 />
 
                 <View style={styles.bookTitle}>
-                    <Text style={{fontSize: 32}}>Title</Text>
+                    <Text style={{fontSize: 32}}>
+                        React Native
+                    </Text>
+                </View>
+
+                <View style={styles.price}>
+                    <Text style={{fontSize: 24}}>
+                        600円
+                    </Text>
                 </View>
 
                 <View style={styles.buttonContainer}>
@@ -43,9 +51,10 @@ const styles = StyleSheet.create({
         paddingTop: 96,
     },
     bookTitle: {
-        width: '100%',
-        alignItems: 'center',
         paddingTop: 16,
+    },
+    price: {
+        paddingTop: 8,
     },
     buttonContainer: {
         width: '100%',
