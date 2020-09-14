@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     button: {
+        padding: 4,
         borderWidth: 2,
         borderRadius: 4,
     }
