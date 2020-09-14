@@ -22,10 +22,10 @@ const Header = () => {
         flexDirection: "column",
       }}
     >
-      <View style={{ height: 50, backgroundColor: "lightskyblue" }}>
+      <View style={{ height: 50, backgroundColor: "lightblue" }}>
         <View style={{ flexDirection: "row-reverse", paddingTop: 6 }}>
-          <Icon style={styles.rightIcon} name="gear" size={30} color="white" />
-          <Text style={styles.headerText}>あ</Text>
+          <Icon style={styles.rightIcon} name="gear" size={30} color="gray" />
+          {/* <Text style={styles.headerText}></Text> */}
         </View>
       </View>
     </View>
@@ -33,5 +33,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// justifyContent: "flex-end"

@@ -13,11 +13,11 @@ const AnonymousHeader = () => {
       }}
     >
       <Header />
-      <View style={{ height: 2, backgroundColor: "cornflowerblue" }} />
+      <View style={{ height: 2, backgroundColor: "gray" }} />
       <View
         style={{
           height: 60,
-          backgroundColor: "lightskyblue",
+          backgroundColor: "lightblue",
           alignItems: "center",
           justifyContent: "center",
         }}
