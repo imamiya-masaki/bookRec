@@ -7,7 +7,6 @@ import { List } from '@ui-kitten/components';
 import RecommendCard from '../components/recommendCard'
 
 export default class RecommendBookComponent extends React.Component {
-    
     render() {
         let images = [
             'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg',
