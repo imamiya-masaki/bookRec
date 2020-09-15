@@ -12,7 +12,7 @@ export default class RecommendCard extends React.Component {
         let reactions = data.reactions;
 
         return (
-            <View style={{flexDirection: 'row', alignItems: 'center',}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
                 <Layout>
                     <Avatar size='giant' source={{uri: 'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'}}/>
                     <Text>{data.username}</Text>

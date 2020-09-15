@@ -8,26 +8,7 @@ import RecommendCard from '../components/recommendCard'
 
 export default class RecommendBookComponent extends React.Component {
     render() {
-        let images = [
-            'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg',
-            'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-        ];
-
-        let reactions = [
-            'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png',
-            'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'
-        ];
-
-        let user = {
-            username: 'username',
-            images: images,
-            reactions: reactions
-        }
-
-        let data = []
-        data.push(user)
-        data.push(user)
-        data.push(user)
+        let data = this.props.data;
 
         const renderItem = ({ item, index }) => {
             return (
