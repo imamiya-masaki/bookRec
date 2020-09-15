@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-import { Avatar } from '@ui-kitten/components';
+import { Avatar, Card } from '@ui-kitten/components';
 
 export default class RecommendCard extends React.Component {
     render() {
@@ -12,10 +12,10 @@ export default class RecommendCard extends React.Component {
         let reactions = data.reactions;
 
         return (
-            <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
-                <Layout>
+            <Card>
+                <Layout style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
                     <Avatar size='giant' source={{uri: 'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'}}/>
-                    <Text>{data.username}</Text>
+                    <Text style={{padding: 10}}>{data.username}</Text>
                 </Layout>
                 
                 <Layout style={{flexDirection: 'row'}}>
@@ -26,7 +26,7 @@ export default class RecommendCard extends React.Component {
                         </Layout>
                     ))}
                 </Layout>
-            </View>
+            </Card>
         )
     }
 }
