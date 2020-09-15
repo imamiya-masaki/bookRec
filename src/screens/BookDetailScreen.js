@@ -1,43 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout, Text, Button } from '@ui-kitten/components';
 
 export default class BookDetailScreen extends React.Component {
     render () {
 
         return (
-            <View style={styles.container}>
-                <Image
-                    style={{width: 320, height: 320}}
-                    source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
-                />
+            <ApplicationProvider {...eva} theme={eva.light}>
+                <Layout style={styles.container}>
+                    <Image
+                        style={{width: 320, height: 320}}
+                        source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+                    />
 
-                <View style={styles.bookTitle}>
-                    <Text style={{fontSize: 32}}>
-                        React Native
-                    </Text>
-                </View>
-
-                <View style={styles.price}>
-                    <Text style={{fontSize: 24}}>
-                        600円
-                    </Text>
-                </View>
-
-                <View style={styles.buttonContainer}>
-                    <TouchableHighlight style={styles.button} onPress={() => {}}>
+                    <Layout style={styles.bookTitle}>
                         <Text style={{fontSize: 32}}>
+                            React Native
+                        </Text>
+                    </Layout>
+
+                    <Layout style={styles.buttonContainer}>
+                        <Button onPress={() => {}}>
                             サンプル
-                        </Text>
-                    </TouchableHighlight>
+                        </Button>
 
-                    <TouchableHighlight style={styles.button} onPress={() => {}}>
-                        <Text style={{fontSize: 32}}>
+                        <Button onPress={() => {}}>
                             購入する
-                        </Text>
-                    </TouchableHighlight>
-                </View>
-                
-            </View>
+                        </Button>
+                    </Layout>
+                </Layout>
+            </ApplicationProvider>
         )
     }
 }
@@ -62,8 +55,4 @@ const styles = StyleSheet.create({
         paddingTop: 48,
         justifyContent: 'space-around',
     },
-    button: {
-        borderWidth: 2,
-        borderRadius: 4,
-    }
 })
