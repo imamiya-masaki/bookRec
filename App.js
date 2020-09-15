@@ -1,41 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function RecommendScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Recommend!</Text>
-    </View>
-  );
-}
-
-function ShelfScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Shelf!</Text>
-    </View>
-  );
-}
-
-function StoreScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Store!</Text>
-    </View>
-  );
-}
+import HomeScreen from './src/screens/HomeScreen';
+import RecommendScreen from './src/screens/RecommendScreen';
+import ShelfScreen from './src/screens/ShelfScreen';
+import StoreScreen from './src/screens/StoreScreen';
 
 const Tab = createBottomTabNavigator();
 
