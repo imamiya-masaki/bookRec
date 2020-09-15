@@ -6,14 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from './src/screens/HomeScreen';
+import RecommendScreen from './src/screens/RecommendScreen';
 
-function RecommendScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Recommend!</Text>
-    </View>
-  );
-}
 
 function ShelfScreen() {
   return (
