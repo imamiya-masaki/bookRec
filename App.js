@@ -7,15 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from './src/screens/HomeScreen';
 import RecommendScreen from './src/screens/RecommendScreen';
-
-
-function ShelfScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Shelf!</Text>
-    </View>
-  );
-}
+import ShelfScreen from './src/screens/ShelfScreen';
 
 function StoreScreen() {
   return (
