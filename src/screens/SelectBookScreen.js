@@ -8,6 +8,7 @@ import {
     Text,
     Input,
 } from "@ui-kitten/components";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 export default class SelectBookScreen extends React.Component {
 
@@ -32,6 +33,14 @@ export default class SelectBookScreen extends React.Component {
                 uri: 'https://reactnative.dev/img/tiny_logo.png'
             },
         ],
+        selectedItems: [
+        ],
+    }
+
+    addSelectedItem(item) {
+        this.setState({
+            selectedItems: this.state.selectedItems.concat(item)
+        })
     }
 
     renderItem({item}) {
@@ -74,12 +83,33 @@ export default class SelectBookScreen extends React.Component {
                             data={this.state.data}
                             keyExtractor={(item) => item.id}
                             numColumns={2}
-                            renderItem={this.renderItem}
+                            renderItem={ ({item}) => (
+                                <TouchableHighlight onPress={() => this.addSelectedItem(item)}>
+                                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                            <Image 
+                                                style={{ width: 100, height: 100 }}
+                                                source={{uri: item.uri}}
+                                            />
+                                            <Text>
+                                                {item.title}
+                                            </Text>
+                                    </View>
+                                </TouchableHighlight>
+                            )}
+                    />
+
+                    <FlatList
+                        style={{flex: 1, height: 100}}
+                        data={this.state.selectedItems}
+                        keyExtractor={(item) => item.id}
+                        horizontal={true}
+                        renderItem={this.renderItem}
                     />
     
                 </Layout>
             </ApplicationProvider>
         )
+
     }
 }
 
