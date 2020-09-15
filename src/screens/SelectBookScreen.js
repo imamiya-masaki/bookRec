@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, FlatList, View, Image } from "react-native";
+import {StyleSheet, FlatList, View, Image, TouchableHighlight } from "react-native";
 import * as eva from "@eva-design/eva";
 import {
     ApplicationProvider,
@@ -8,7 +8,6 @@ import {
     Text,
     Input,
 } from "@ui-kitten/components";
-import { TouchableHighlight } from "react-native-gesture-handler";
 
 export default class SelectBookScreen extends React.Component {
 
@@ -84,7 +83,7 @@ export default class SelectBookScreen extends React.Component {
                             keyExtractor={(item) => item.id}
                             numColumns={2}
                             renderItem={ ({item}) => (
-                                <TouchableHighlight onPress={() => this.addSelectedItem(item)}>
+                                <TouchableHighlight style={{flex: 1, paddingTop: 8}} onPress={() => this.addSelectedItem(item)}>
                                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                                             <Image 
                                                 style={{ width: 100, height: 100 }}
