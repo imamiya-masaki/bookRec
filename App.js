@@ -9,19 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Header from "./src/component/Header";
 import AnonymousHeader from "./src/component/AnonymousHeader";
 import AnonymousModal from "./src/component/AnonymousModal";
-
-function HomeScreen() {
-  return (
-    <View>
-      <Header />
-      <Icon name="gear" size={50} color="gray" />
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Home!</Text>
-      </View>
-    </View>
-  );
-}
-// Iconをモーダルにしたい。Headerにprop渡す必要ありそう。2段階で引数渡す。
+import HomeScreen from './src/screens/HomeScreen';
 
 function RecommendScreen() {
   return (
@@ -60,14 +48,6 @@ const Tab = createBottomTabNavigator();
 
 // export default function App() {
 export default class App extends React.Component {
-  state = {
-    isModalVisible: false,
-  };
-
-  toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-  };
-
   render() {
     return (
       // <SafeAreaView style={{ flex: 1 }}>
