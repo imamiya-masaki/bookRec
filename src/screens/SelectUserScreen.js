@@ -15,7 +15,9 @@ import RecommendUserList from '../components/RecommendUserList';
 export default class SelectUserScreen extends React.Component {
    
     state = {
-        users: [
+        userName: "",
+        users: [],
+        items: [
             {
                 id: 1,
                 name: "taro",
@@ -31,6 +33,11 @@ export default class SelectUserScreen extends React.Component {
         ],
         selectedUsers: [],
     }
+
+    componentDidMount() {
+        this.setState({users: this.state.items})
+    }
+
 
     addSelectedItem(item) {
         if (this.state.selectedUsers != null && !this.state.selectedUsers.includes(item)) {
@@ -58,6 +65,15 @@ export default class SelectUserScreen extends React.Component {
         }
     }
 
+    search(userName) {
+        if (userName == "") {
+            this.setState({users: this.state.items})
+        } else {
+            let hitUsers = this.state.items.filter(item => item.name.includes(userName))
+            this.setState({users: hitUsers})
+        }
+    }
+
     render() {
         const { selectedBooks } = this.props.route.params
 
@@ -67,12 +83,12 @@ export default class SelectUserScreen extends React.Component {
                     <Layout style={styles.searchItems}>
                             <Layout style={{flex:1, paddingRight: 8}}>
                                 <Input
-                                    placeholder="User"
+                                    placeholder="User name"
                                     onChangeText={text => this.setState({userName: text})}
                                 />
                             </Layout>
                         
-                            <Button>
+                            <Button onPress={() => this.search(this.state.userName)}>
                                 検索
                             </Button>
                     </Layout>
