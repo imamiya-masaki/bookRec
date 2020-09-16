@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+import { ApplicationProvider, Layout, Text,Card} from '@ui-kitten/components';
 import axios from 'axios';
-import {Image, Button,TouchableOpacity} from 'react-native' ; 
-import {styles} from 'react-native' ; 
+import {Image, Button,TouchableOpacity, StyleSheet} from 'react-native' ; 
+import Navigation from 'react-native-navigation';
 // const BookShelf = () => {
 //     let bookShelf = []
 
@@ -18,6 +18,9 @@ export default class ShelfScreen extends React.Component {
         items: []
       }
       console.log('!aa!')
+    }
+    onButtonClick = (data) => {
+      
     }
     componentDidMount () {
         const url = 'http://127.0.0.1:8080/book/'
@@ -42,7 +45,7 @@ export default class ShelfScreen extends React.Component {
           (error) => {
             this.setState({
               isLoaded: true,
-              error
+              error: error
             });
           }
         )
@@ -60,30 +63,44 @@ export default class ShelfScreen extends React.Component {
     }
     render() {
       const {error, isLoaded, items} = this.state;
-      let set = []
-        for (let item of items) {
-          set.push(
+      let itemSeparaite = [[]]
+      let index = 0
+      for (let item of items) {
+        if (itemSeparaite[index].length >=4) {
+          index += 1
+        }
+        itemSeparaite[index].push(
           <TouchableOpacity
           onPress={() => console.log(item)}>
           <Image
-              style={{width: 100, height: 100}}
+              style={styles.book_image}
               source={{
-                uri: 'https://reactnative.dev/img/tiny_logo.png',
+                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg',
               }}
           />
-          </TouchableOpacity>)
+          </TouchableOpacity>
+        )
+      }
+        let set = []
+        for (let i = 0; i<=index; i++){
+          set.push(<Layout style={{flexDirection: 'row', paddingBottom:10, borderBottomWidth: 1 }}>
+            {itemSeparaite[i]}
+          </Layout>)
         }
         return (
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout style={{flex: 1, paddingTop:30}}>
-                  <Layout style={{flexDirection: 'row', paddingBottom:10 }}>
-                    {set}
-                  </Layout>
-                  <Layout style={{flexDirection: 'row', paddingBottom:10}}>
-                    {set}
-                  </Layout>
+                  {set}
                 </Layout>
             </ApplicationProvider>
         )
     }
 }
+
+const styles = StyleSheet.create({
+  book_image: {
+      marginLeft: 15,
+      width: 80,
+      height: 120
+  }
+});
