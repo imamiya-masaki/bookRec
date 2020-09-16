@@ -11,7 +11,6 @@ import {
 
 export default class SelectBookScreen extends React.Component {
 
-
     state = {
         data: [
             {
@@ -58,7 +57,6 @@ export default class SelectBookScreen extends React.Component {
 
     render() {
 
-        const { onPress } = this.props 
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout style={{flex: 1, padding: 24, paddingTop: 64}}>
@@ -76,7 +74,7 @@ export default class SelectBookScreen extends React.Component {
                         </Button>
 
                     </Layout>
-
+                    
                     <FlatList 
                             style={{flex: 1}}
                             data={this.state.data}
@@ -96,6 +94,10 @@ export default class SelectBookScreen extends React.Component {
                                 </TouchableHighlight>
                             )}
                     />
+
+                    <Button onPress={() => this.props.navigation.navigate("SelectUser")}>
+                        次へ
+                    </Button>
 
                     <FlatList
                         style={{flex: 1, height: 100}}

@@ -13,10 +13,6 @@ export default class RecommendButton extends React.Component {
 
         const { onPress } = this.props
 
-        const StarIcon = (props) => (
-            <Icon {...props} name='star'/>
-        );
-
         return (
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout style={styles.container}>

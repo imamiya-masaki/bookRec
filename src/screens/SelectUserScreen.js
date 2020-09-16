@@ -8,22 +8,21 @@ import {
     Text,
     Input,
 } from "@ui-kitten/components";
-import { TouchableHighlight } from "react-native-gesture-handler";
 
-export default class SelectBookScreen extends React.Component {
+export default class SelectUserScreen extends React.Component {
    
     render() {
         const { onPress } = this.props 
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
-                <Layout>
+                <Layout style={{flex: 1, alignItems: 'center'}}>
                     <Text>
                         SelectUser
                     </Text>
+                    <Button onPress={() => this.props.navigation.navigate('Home')}/>
                 </Layout>
             </ApplicationProvider>
         )
-
     }
 }
 
