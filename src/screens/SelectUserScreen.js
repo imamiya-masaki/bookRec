@@ -34,20 +34,20 @@ export default class SelectUserScreen extends React.Component {
 
     renderItem({item}) {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
+            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                 <Image 
                     style={{ width: 50, height: 80, resizeMode: 'contain' }}
                     source={{uri: item.uri}}
                 />
                 <Text>
-                    {item.title}
+                    {item.name}
                 </Text>
-            </View>
+            </Layout>
         )
     }
 
     addSelectedItem(item) {
-                if (this.state.selectedUsers != null && !this.state.selectedUsers.includes(item)) {
+        if (this.state.selectedUsers != null && !this.state.selectedUsers.includes(item)) {
             this.setState({
                 selectedUsers: this.state.selectedUsers.concat(item)
             })
@@ -79,8 +79,8 @@ export default class SelectUserScreen extends React.Component {
                             keyExtractor={(item) => item.id}
                             numColumns={2}
                             renderItem={ ({item}) => (
-                                <View style={{flex: 1, paddingTop: 8}}>
-                                    <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+                                <Layout style={{flex: 1, paddingTop: 8}}>
+                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
                                         <TouchableHighlight
                                             onPress={() => this.addSelectedItem(item)}
                                             underlayColor='transparent'
@@ -90,11 +90,13 @@ export default class SelectUserScreen extends React.Component {
                                                 source={{uri: item.uri}}
                                             />
                                         </TouchableHighlight>
-                                            <Text>
-                                                {item.name}
-                                            </Text>
-                                    </View>
-                                </View>
+                                            <Layout>
+                                                <Text>
+                                                    {item.name}
+                                                </Text>
+                                            </Layout>
+                                    </Layout>
+                                </Layout>
                             )}
                     />
 

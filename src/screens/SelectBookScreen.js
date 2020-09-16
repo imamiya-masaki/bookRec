@@ -45,7 +45,7 @@ export default class SelectBookScreen extends React.Component {
 
     renderItem({item}) {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
+            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                 <Image 
                     style={{ width: 50, height: 80, resizeMode: 'contain' }}
                     source={{uri: item.uri}}
@@ -53,7 +53,7 @@ export default class SelectBookScreen extends React.Component {
                 <Text>
                     {item.title}
                 </Text>
-            </View>
+            </Layout>
         )
     }
 
@@ -87,7 +87,7 @@ export default class SelectBookScreen extends React.Component {
                                     onPress={() => this.addSelectedItem(item)}
                                     underlayColor='transparent'
                                 >
-                                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                                             <Image 
                                                 style={{ width: 100, height: 160 }}
                                                 source={{uri: item.uri}}
@@ -95,7 +95,7 @@ export default class SelectBookScreen extends React.Component {
                                             <Text>
                                                 {item.title}
                                             </Text>
-                                    </View>
+                                    </Layout>
                                 </TouchableHighlight>
                             )}
                     />
