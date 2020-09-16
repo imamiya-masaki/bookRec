@@ -36,16 +36,18 @@ export default class SelectBookScreen extends React.Component {
     }
 
     addSelectedItem(item) {
-        this.setState({
-            selectedBooks: this.state.selectedBooks.concat(item)
-        })
+        if (this.state.selectedBooks != null && !this.state.selectedBooks.includes(item)) {
+            this.setState({
+                selectedBooks: this.state.selectedBooks.concat(item)
+            })
+        } 
     }
 
     renderItem({item}) {
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                 <Image 
-                    style={{ width: 100, height: 160 }}
+                    style={{ width: 50, height: 80, resizeMode: 'contain' }}
                     source={{uri: item.uri}}
                 />
                 <Text>
@@ -76,7 +78,6 @@ export default class SelectBookScreen extends React.Component {
                     </Layout>
                     
                     <FlatList 
-                            style={{flex: 1}}
                             data={this.state.data}
                             keyExtractor={(item) => item.id}
                             numColumns={2}
@@ -100,7 +101,6 @@ export default class SelectBookScreen extends React.Component {
                     />
 
                     <FlatList
-                        style={{flex: 1}}
                         data={this.state.selectedBooks}
                         keyExtractor={(item) => item.id}
                         horizontal={true}

@@ -36,7 +36,7 @@ export default class SelectUserScreen extends React.Component {
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                 <Image 
-                    style={{ width: 100, height: 160 }}
+                    style={{ width: 50, height: 80, resizeMode: 'contain' }}
                     source={{uri: item.uri}}
                 />
                 <Text>
@@ -47,9 +47,11 @@ export default class SelectUserScreen extends React.Component {
     }
 
     addSelectedItem(item) {
-        this.setState({
-            selectedUsers: this.state.selectedUsers.concat(item)
-        })
+                if (this.state.selectedUsers != null && !this.state.selectedUsers.includes(item)) {
+            this.setState({
+                selectedUsers: this.state.selectedUsers.concat(item)
+            })
+        }
     }
 
     render() {
@@ -72,7 +74,7 @@ export default class SelectUserScreen extends React.Component {
                     </Layout>
 
                     <FlatList 
-                            style={{flex: 1}}
+                            style={{flex: 2}}
                             data={this.state.users}
                             keyExtractor={(item) => item.id}
                             numColumns={2}
@@ -97,7 +99,7 @@ export default class SelectUserScreen extends React.Component {
                     />
 
                     <FlatList
-                        style={{flex: 2, height: 50}}
+                        style={{flex: 1, height: 50}}
                         data={this.state.selectedUsers}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
