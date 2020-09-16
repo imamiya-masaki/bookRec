@@ -31,13 +31,13 @@ export default class SelectBookScreen extends React.Component {
                 uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
             },
         ],
-        selectedItems: [
+        selectedBooks: [
         ],
     }
 
     addSelectedItem(item) {
         this.setState({
-            selectedItems: this.state.selectedItems.concat(item)
+            selectedBooks: this.state.selectedBooks.concat(item)
         })
     }
 
@@ -59,9 +59,9 @@ export default class SelectBookScreen extends React.Component {
 
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
-                <Layout style={{flex: 1, padding: 24}}>
+                <Layout style={styles.container}>
 
-                    <Layout style={{alignItems: 'center',flexDirection: "row", backgroundColor:"#ddd"}}>
+                    <Layout style={styles.searchItems}>
                         <Layout style={{flex:1, paddingRight: 8}}>
                             <Input
                                 placeholder="Book"
@@ -81,7 +81,11 @@ export default class SelectBookScreen extends React.Component {
                             keyExtractor={(item) => item.id}
                             numColumns={2}
                             renderItem={ ({item}) => (
-                                <TouchableHighlight style={{flex: 1, paddingTop: 8}} onPress={() => this.addSelectedItem(item)}>
+                                <TouchableHighlight
+                                    style={{flex: 1, paddingTop: 8}}
+                                    onPress={() => this.addSelectedItem(item)}
+                                    underlayColor='transparent'
+                                >
                                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                                             <Image 
                                                 style={{ width: 100, height: 160 }}
@@ -97,13 +101,13 @@ export default class SelectBookScreen extends React.Component {
 
                     <FlatList
                         style={{flex: 1}}
-                        data={this.state.selectedItems}
+                        data={this.state.selectedBooks}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
                         renderItem={this.renderItem}
                     />
 
-                    <Button onPress={() => this.props.navigation.navigate("SelectUser", {selectedBooks: this.state.selectedItems})}>
+                    <Button onPress={() => this.props.navigation.navigate("SelectUser", {selectedBooks: this.state.selectedBooks})}>
                         次へ
                     </Button>
     
@@ -113,3 +117,13 @@ export default class SelectBookScreen extends React.Component {
     }
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+    },
+    searchItems: {
+        alignItems: 'center',
+        flexDirection: "row",
+    }
+})
