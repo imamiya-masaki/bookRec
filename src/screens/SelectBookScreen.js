@@ -77,6 +77,7 @@ export default class SelectBookScreen extends React.Component {
     }
 
     render() {
+        const { root } = this.props.route.params
 
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
@@ -117,7 +118,7 @@ export default class SelectBookScreen extends React.Component {
 
                     <RecommendBookList selectedBooks={this.state.selectedBooks} />
 
-                    <Button onPress={() => this.props.navigation.navigate("SelectUser", {selectedBooks: this.state.selectedBooks})}>
+                    <Button onPress={() => this.props.navigation.navigate("SelectUser", { root: root, selectedBooks: this.state.selectedBooks })}>
                         次へ
                     </Button>
     

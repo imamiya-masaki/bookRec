@@ -75,7 +75,7 @@ export default class SelectUserScreen extends React.Component {
     }
 
     render() {
-        const { selectedBooks } = this.props.route.params
+        const { root, selectedBooks } = this.props.route.params
 
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
@@ -118,8 +118,9 @@ export default class SelectUserScreen extends React.Component {
                     <RecommendBookList selectedBooks={selectedBooks} />
 
                     <Button onPress={() => this.props.navigation.navigate('SendRecommend',
-                        {selectedBooks: selectedBooks,
-                        selectedUsers: this.state.selectedUsers,
+                        {root: root,
+                         selectedBooks: selectedBooks,
+                         selectedUsers: this.state.selectedUsers,
                     })}>
                         次へ
                     </Button>
