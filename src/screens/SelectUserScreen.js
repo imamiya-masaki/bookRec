@@ -10,7 +10,7 @@ import {
 } from "@ui-kitten/components";
 
 import RecommendBookList from '../components/RecommendBookList';
-
+import RecommendUserList from '../components/RecommendUserList';
 
 export default class SelectUserScreen extends React.Component {
    
@@ -19,34 +19,17 @@ export default class SelectUserScreen extends React.Component {
             {
                 id: 1,
                 name: "taro",
-                uri: "https://i.imgur.com/AkNqIrO.png",
             },
             {
                 id: 2,
                 name: "jiro",
-                uri: "https://i.imgur.com/AkNqIrO.png",
             },
             {
                 id: 3,
                 name: "sanro",
-                uri: "https://i.imgur.com/AkNqIrO.png",
             }
         ],
         selectedUsers: [],
-    }
-
-    renderUser({item}) {
-        return (
-            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
-                <Image 
-                    style={{ width: 50, height: 80, resizeMode: 'contain' }}
-                    source={{uri: "https://i.imgur.com/AkNqIrO.png"}}
-                />
-                <Text>
-                    {item.name}
-                </Text>
-            </Layout>
-        )
     }
 
     addSelectedItem(item) {
@@ -87,7 +70,7 @@ export default class SelectUserScreen extends React.Component {
                                     <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>                                        
                                         <Image 
                                             style={{ width: 100, height: 100 }}
-                                            source={{uri: item.uri}}
+                                            source={{uri: "https://i.imgur.com/AkNqIrO.png"}}
                                         />
                                         <Layout>
                                             <Text>
@@ -100,15 +83,8 @@ export default class SelectUserScreen extends React.Component {
                             )}
                     />
 
-                    <FlatList
-                        data={this.state.selectedUsers}
-                        keyExtractor={(item) => item.id}
-                        horizontal={true}
-                        renderItem={this.renderUser}
-                    />
-                
+                    <RecommendUserList selectedUsers={this.state.selectedUsers} />
                     <RecommendBookList selectedBooks={selectedBooks} />
-                    
 
                     <Button onPress={() => this.props.navigation.navigate('SendRecommend',
                         {selectedBooks: selectedBooks,
