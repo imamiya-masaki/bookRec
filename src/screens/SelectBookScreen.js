@@ -9,30 +9,50 @@ import {
     Input,
 } from "@ui-kitten/components";
 
+import RecommendBookList from '../components/RecommendBookList';
+
 export default class SelectBookScreen extends React.Component {
 
     state = {
-        data: [
-            {
-                id: '1',
-                title: '鋼の錬金術師',
-                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-            },{
-                id: '2',
-                title: '鋼の錬金術師',
-                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-            },{
-                id: '3',
-                title: '鋼の錬金術師',
-                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-            },{
-                id: '4',
-                title: '鋼の錬金術師',
-                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-            },
-        ],
+        // books: [
+        //     {
+        //         id: '1',
+        //         title: '鋼の錬金術師',
+        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
+        //     },{
+        //         id: '2',
+        //         title: '鋼の錬金術師',
+        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
+        //     },{
+        //         id: '3',
+        //         title: '鋼の錬金術師',
+        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
+        //     },{
+        //         id: '4',
+        //         title: '鋼の錬金術師',
+        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
+        //     },
+        // ],
         selectedBooks: [
         ],
+    }
+
+    componentDidMount() {
+        const url = 'http://127.0.0.1:8080/book/'
+        fetch(url)
+        .then(res => res.json() )
+        .then(
+            (result) => {
+                let getItems = []
+                for (let i = 0; i<result.length; i++) {
+                    console.log(result[i]);
+                    getItems.push(result[i])
+                }
+                this.setState({
+                    books: getItems
+                });
+            }
+        )
     }
 
     addSelectedItem(item) {
@@ -41,20 +61,6 @@ export default class SelectBookScreen extends React.Component {
                 selectedBooks: this.state.selectedBooks.concat(item)
             })
         } 
-    }
-
-    renderItem({item}) {
-        return (
-            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
-                <Image 
-                    style={{ width: 50, height: 80, resizeMode: 'contain' }}
-                    source={{uri: item.uri}}
-                />
-                <Text>
-                    {item.title}
-                </Text>
-            </Layout>
-        )
     }
 
     render() {
@@ -78,7 +84,7 @@ export default class SelectBookScreen extends React.Component {
                     </Layout>
                     
                     <FlatList 
-                            data={this.state.data}
+                            data={this.state.books}
                             keyExtractor={(item) => item.id}
                             renderItem={ ({item}) => (
                                 <TouchableHighlight
@@ -89,7 +95,7 @@ export default class SelectBookScreen extends React.Component {
                                     <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                                             <Image 
                                                 style={{ width: 100, height: 160 }}
-                                                source={{uri: item.uri}}
+                                                source={{uri: "https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg"}}
                                             />
                                             <Text>
                                                 {item.title}
@@ -99,12 +105,7 @@ export default class SelectBookScreen extends React.Component {
                             )}
                     />
 
-                    <FlatList
-                        data={this.state.selectedBooks}
-                        keyExtractor={(item) => item.id}
-                        horizontal={true}
-                        renderItem={this.renderItem}
-                    />
+                    <RecommendBookList selectedBooks={this.state.selectedBooks} />
 
                     <Button onPress={() => this.props.navigation.navigate("SelectUser", {selectedBooks: this.state.selectedBooks})}>
                         次へ

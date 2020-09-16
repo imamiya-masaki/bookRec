@@ -9,6 +9,9 @@ import {
     Input,
 } from "@ui-kitten/components";
 
+import RecommendBookList from '../components/RecommendBookList';
+
+
 export default class SelectUserScreen extends React.Component {
    
     state = {
@@ -32,12 +35,12 @@ export default class SelectUserScreen extends React.Component {
         selectedUsers: [],
     }
 
-    renderItem({item}) {
+    renderUser({item}) {
         return (
             <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                 <Image 
                     style={{ width: 50, height: 80, resizeMode: 'contain' }}
-                    source={{uri: item.uri}}
+                    source={{uri: "https://i.imgur.com/AkNqIrO.png"}}
                 />
                 <Text>
                     {item.name}
@@ -101,15 +104,11 @@ export default class SelectUserScreen extends React.Component {
                         data={this.state.selectedUsers}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
-                        renderItem={this.renderItem}
+                        renderItem={this.renderUser}
                     />
-
-                    <FlatList
-                        data={selectedBooks}
-                        keyExtractor={(item) => item.id}
-                        horizontal={true}
-                        renderItem={this.renderItem}
-                    />
+                
+                    <RecommendBookList selectedBooks={selectedBooks} />
+                    
 
                     <Button onPress={() => this.props.navigation.navigate('SendRecommend',
                         {selectedBooks: selectedBooks,

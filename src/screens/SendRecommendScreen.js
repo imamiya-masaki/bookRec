@@ -9,6 +9,8 @@ import {
     Input,
 } from "@ui-kitten/components";
 
+import RecommendBookList from '../components/RecommendBookList';
+
 export default class SelectRecommendScreen extends React.Component {
    
     state = {
@@ -20,7 +22,7 @@ export default class SelectRecommendScreen extends React.Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                 <Image 
                     style={{ width: 50, height: 80, resizeMode: 'contain' }}
-                    source={{uri: item.uri}}
+                    source={{uri: "https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg"}}
                 />
                 <Text>
                     {item.title}
@@ -39,12 +41,7 @@ export default class SelectRecommendScreen extends React.Component {
                     <Text>
                         おすすめする本
                     </Text>
-                    <FlatList
-                        data={selectedBooks}
-                        keyExtractor={(item) => item.id}
-                        horizontal={true}
-                        renderItem={this.renderItem}
-                    />
+                    <RecommendBookList selectedBooks={selectedBooks} />
 
                     <Text>
                         本をおすすめするユーザー
