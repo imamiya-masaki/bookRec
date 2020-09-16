@@ -80,7 +80,6 @@ export default class SelectBookScreen extends React.Component {
                     <FlatList 
                             data={this.state.data}
                             keyExtractor={(item) => item.id}
-                            numColumns={2}
                             renderItem={ ({item}) => (
                                 <TouchableHighlight
                                     style={{flex: 1, paddingTop: 8}}

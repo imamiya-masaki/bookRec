@@ -74,34 +74,30 @@ export default class SelectUserScreen extends React.Component {
                     </Layout>
 
                     <FlatList 
-                            style={{flex: 2}}
                             data={this.state.users}
                             keyExtractor={(item) => item.id}
-                            numColumns={2}
                             renderItem={ ({item}) => (
-                                <Layout style={{flex: 1, paddingTop: 8}}>
-                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-                                        <TouchableHighlight
-                                            onPress={() => this.addSelectedItem(item)}
-                                            underlayColor='transparent'
-                                        >
-                                            <Image 
-                                                style={{ width: 100, height: 100 }}
-                                                source={{uri: item.uri}}
-                                            />
-                                        </TouchableHighlight>
-                                            <Layout>
-                                                <Text>
-                                                    {item.name}
-                                                </Text>
-                                            </Layout>
+                                <TouchableHighlight
+                                onPress={() => this.addSelectedItem(item)}
+                                underlayColor='transparent'
+                                >
+                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>                                        
+                                        <Image 
+                                            style={{ width: 100, height: 100 }}
+                                            source={{uri: item.uri}}
+                                        />
+                                        <Layout>
+                                            <Text>
+                                                {item.name}
+                                            </Text>
+                                        </Layout>
                                     </Layout>
-                                </Layout>
+                                </TouchableHighlight>
+
                             )}
                     />
 
                     <FlatList
-                        style={{flex: 1, height: 50}}
                         data={this.state.selectedUsers}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
@@ -109,14 +105,16 @@ export default class SelectUserScreen extends React.Component {
                     />
 
                     <FlatList
-                        style={{flex: 1}}
                         data={selectedBooks}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
                         renderItem={this.renderItem}
                     />
 
-                    <Button onPress={() => this.props.navigation.navigate('Home')}>
+                    <Button onPress={() => this.props.navigation.navigate('SendRecommend',
+                        {selectedBooks: selectedBooks,
+                        selectedUsers: this.state.selectedUsers,
+                    })}>
                         次へ
                     </Button>
                 </Layout>
