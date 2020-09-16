@@ -8,13 +8,13 @@ import BookDetailScreen from './BookDetailScreen';
 
 const BookStack = createStackNavigator();
 
-export default class RecommendStackScreen extends React.Component {
+export default class myBookStackScreen extends React.Component {
     render() {
         return(
-            <RecommendStack.Navigator>
-                <RecommendStack.Screen name="BookShelf" component={ShelfScreen} />
-                <RecommendStack.Screen name="BookDetail" component={BookDetailScreen} />
-            </RecommendStack.Navigator>
+            <myBookStack.Navigator>
+                <myBookStack.Screen name="BookShelf" component={ShelfScreen} />
+                <myBookStack.Screen name="BookDetail" component={BookDetailScreen} />
+            </myBookStack.Navigator>
         )
     }
 }

@@ -3,13 +3,18 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text,Card} from '@ui-kitten/components';
 import axios from 'axios';
 import {Image, Button,TouchableOpacity, StyleSheet} from 'react-native' ; 
-import Navigation from 'react-native-navigation';
+import BookDetailScreen from './BookDetailScreen';
+// import Navigation from 'react-native-navigation';
+import createStackNavigator from '@react-navigation/stack';
 // const BookShelf = () => {
 //     let bookShelf = []
 
 // }
 export default class ShelfScreen extends React.Component {
   state = {books: []}
+  static navigationOptions = {
+    title:"BookShelf"
+  }
     constructor(props) {
       super(props)
       this.state = {
@@ -19,9 +24,9 @@ export default class ShelfScreen extends React.Component {
       }
       console.log('!aa!')
     }
-    onButtonClick = (data) => {
-      
-    }
+    // onButtonClick = (data) => {
+    //   this.props.navigation.navigate('BookDetail', {selectedBook: data})
+    // }
     componentDidMount () {
         const url = 'http://127.0.0.1:8080/book/'
         console.log('url', url)
@@ -71,7 +76,7 @@ export default class ShelfScreen extends React.Component {
         }
         itemSeparaite[index].push(
           <TouchableOpacity
-          onPress={() => console.log(item)}>
+          onPress={() => {this.props.navigation.navigate('BookDetail')}}>
           <Image
               style={styles.book_image}
               source={{
@@ -96,7 +101,6 @@ export default class ShelfScreen extends React.Component {
         )
     }
 }
-
 const styles = StyleSheet.create({
   book_image: {
       marginLeft: 15,

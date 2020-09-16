@@ -10,6 +10,13 @@ import {
 import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
 export default class BookDetailScreen extends React.Component {
+  static navigationOptions = {
+    title:"BookDetail"
+  }
+  constructor(props){
+    super(props);
+    this.state = { myinput: '' };
+  }
   render() {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
