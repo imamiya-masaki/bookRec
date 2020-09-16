@@ -13,7 +13,7 @@ import Icon5 from "react-native-vector-icons/FontAwesome5";
 import { ApplicationProvider, Layout } from "@ui-kitten/components";
 
 // スクロールできるものor画面遷移できるものにしてチュートリアルを作成する。
-export default class TutorialModal extends React.Component {
+export default class HelpModal extends React.Component {
   render() {
     return (
       <View
@@ -50,7 +50,7 @@ export default class TutorialModal extends React.Component {
           title={"さんからリアクションが届きました。"}
           leftIcon={<Icon5 name={"heart"} size={20} color="pink" />}
         /> */}
-        <Button title="匿名解除を希望する" />
+        <Button title="ヘルプ" />
         <Button title="キャンセル" onPress={this.props.nav.toggleModal} />
       </View>
       //     </ScrollView>
