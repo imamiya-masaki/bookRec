@@ -13,19 +13,8 @@ import {
 import { ApplicationProvider, Layout } from "@ui-kitten/components";
 import Header from "../components/Header";
 import { ListItem, Button, Image } from "react-native-elements";
-import BookDetailScreen from "./BookDetailScreen";
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { StackNavigator } from "react-navigation";
-
-// const Stack = createStackNavigator({
-//   BookDetailScreen: BookDetailScreen,
-// });
-
-// import ReactionScreen from "./ReactionScreen";
 export default class StoreScreen extends React.Component {
   state = {
-    sms: true,
     isModalVisible: false,
     search: "",
   };
@@ -46,13 +35,15 @@ export default class StoreScreen extends React.Component {
     var Cards = [];
     for (let i = 0; i < label.length; i++) {
       Cards.push(
-        <TouchableOpacity key={i}>
+        <TouchableOpacity
+          key={i}
+          onPress={() => this.props.navigation.navigate("BookDetail")}
+        >
           <Image
             style={{
               width: 100,
               height: 150,
               marginLeft: 10,
-              // onPress={() => navigation.navigate(BookDetailScreen)},
             }}
             source={{
               uri:
@@ -83,23 +74,16 @@ export default class StoreScreen extends React.Component {
     }
 
     return (
-      // <ReactionScreen />
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-          <Header name="ストア" />
-          <View
-            style={{
-              marginTop: 80,
-              marginBottom: 20,
-            }}
-          >
-            <SearchBar
-              placeholder="本を探す..."
-              onChangeText={this.updateSearch}
-              value={search}
-              containerStyle={{ backgroundColor: "white", borderColor: "#fff" }}
-            />
-          </View>
+          {/* <Header name="ストア" /> */}
+          <SearchBar
+            placeholder="本を探す..."
+            onChangeText={this.updateSearch}
+            value={search}
+            containerStyle={{ backgroundColor: "white", borderColor: "#fff" }}
+          />
+          {/* </View> */}
           <ScrollView showsVerticalScrollIndicator={false}>{Books}</ScrollView>
         </SafeAreaView>
       </ApplicationProvider>

@@ -8,6 +8,8 @@ import HomeScreen from "./src/screens/HomeScreen";
 import RecommendScreen from "./src/screens/RecommendScreen";
 import ShelfScreen from "./src/screens/ShelfScreen";
 import StoreScreen from "./src/screens/StoreScreen";
+import BookStackScreen from "./src/screens/BookStackScreen";
+import HomeStackScreen from "./src/screens/HomeStackScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +24,7 @@ export default function App() {
       >
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeStackScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="ios-home" color={color} size={size} />
@@ -49,7 +51,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Store"
-          component={StoreScreen}
+          component={BookStackScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="ios-basket" color={color} size={size} />
@@ -60,5 +62,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({});

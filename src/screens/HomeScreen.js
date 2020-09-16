@@ -17,6 +17,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Icon5 from "react-native-vector-icons/FontAwesome5";
 import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
+import HelpModal from "../components/HelpModal";
 
 // import ReactionScreen from "./ReactionScreen";
 export default class HomeScreen extends React.Component {
@@ -25,7 +26,6 @@ export default class HomeScreen extends React.Component {
   };
 
   state = {
-    sms: true,
     isModalVisible: false,
   };
 
@@ -34,14 +34,22 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+    const { onPress } = this.props;
+    // let modal;
+    // modal = (
+    //   <Modal isVisible={this.state.isModalVisible}>
+    //     <View style={styles.modal}>
+    //       <HelpModal nav={this} />
+    //     </View>
+    //   </Modal>
+    // );
     return (
-      // <ReactionScreen />
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "#eee" }}>
-          <Header name="ホーム" />
+          {/* <Header name="ホーム" /> */}
           <View
             style={{
-              marginTop: 100,
+              marginTop: 20,
               marginLeft: 20,
               flexDirection: "row",
               marginBottom: 20,
@@ -91,6 +99,7 @@ export default class HomeScreen extends React.Component {
             card={this._card}
             column={3}
           />
+          {/* {modal} */}
         </View>
       </ApplicationProvider>
     );
@@ -113,6 +122,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#ecf0f1",
     position: "absolute",
     bottom: 0,
+  },
+  modal: {
+    position: "absolute",
+    bottom: 80,
+    height: 150,
   },
 });
 
