@@ -18,39 +18,54 @@ export default class SelectRecommendScreen extends React.Component {
         message: ""
     }
 
-    pressSend (selectedBooks, selectedUsers) {
+    pressSend (root, selectedBooks, selectedUsers) {
         for (let i=0; i<selectedUsers.length; i++) {
             for (let j=0; j<selectedBooks.length; j++) {
-                const data = {
+                const recommendData = {
                     "SenderId": 1,
                     "ReceiverId": selectedUsers[i].id,
                     "BookId": selectedBooks[j].id,
                     "ReactionContentId" : 1
                 }
 
-                const param = {
+                const recommendParam = {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(data)
-                };
-                fetch('http://127.0.0.1:8080/recommend', param)
-                .then(res => {
-                })
-                .then(data => {
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+                    body: JSON.stringify(recommendData)
+                }
+                fetch('http://127.0.0.1:8080/recommend', recommendParam)
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+
+                const messageData = {
+                    "RecommendId": 1,
+                    "Content": this.state.message
+                }
+
+                const messageParam = {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(messageData)
+                }
+                
+                fetch('http://127.0.0.1:8080/message', messageParam)
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
             }
         }
-        this.props.navigation.navigate("Home")
+        this.props.navigation.navigate(root)
     }
 
     render() {
-        const { selectedBooks, selectedUsers } = this.props.route.params
+        const { root, selectedBooks, selectedUsers } = this.props.route.params
 
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
@@ -81,7 +96,7 @@ export default class SelectRecommendScreen extends React.Component {
                         />
                     </Layout>
 
-                    <Button onPress={() => this.pressSend(selectedBooks, selectedUsers)}>
+                    <Button onPress={() => this.pressSend(root, selectedBooks, selectedUsers)}>
                         送信する
                     </Button>
                 </Layout>
