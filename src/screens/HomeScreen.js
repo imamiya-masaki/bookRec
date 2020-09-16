@@ -18,7 +18,7 @@ import Icon5 from "react-native-vector-icons/FontAwesome5";
 import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
 
-import ReactionScreen from "./ReactionScreen";
+// import ReactionScreen from "./ReactionScreen";
 export default class HomeScreen extends React.Component {
   _card = (el) => {
     console.log("Card: " + el.name);
@@ -38,7 +38,7 @@ export default class HomeScreen extends React.Component {
       // <ReactionScreen />
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "#eee" }}>
-          <Header />
+          <Header name="ホーム" />
           <View
             style={{
               marginTop: 100,
@@ -65,8 +65,6 @@ export default class HomeScreen extends React.Component {
                 title={user.name + "さんからリアクションが届きました。"}
                 leftIcon={<Icon5 name={"laugh"} size={20} color="pink" />}
               />
-            </View>
-            <View style={{ marginTop: 0, width: "100%", alignSelf: "center" }}>
               <ListItem
                 title={user.name + "さんから本のおすすめが届きました。"}
                 leftIcon={<Icon5 name={"book"} size={20} color="skyblue" />}
