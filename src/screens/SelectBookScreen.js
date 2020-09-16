@@ -15,20 +15,20 @@ export default class SelectBookScreen extends React.Component {
         data: [
             {
                 id: '1',
-                title: 'Naruto',
-                uri: 'https://reactnative.dev/img/tiny_logo.png'
+                title: '鋼の錬金術師',
+                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
             },{
                 id: '2',
-                title: 'Naruto',
-                uri: 'https://reactnative.dev/img/tiny_logo.png'
+                title: '鋼の錬金術師',
+                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
             },{
                 id: '3',
-                title: 'Naruto',
-                uri: 'https://reactnative.dev/img/tiny_logo.png'
+                title: '鋼の錬金術師',
+                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
             },{
                 id: '4',
-                title: 'Naruto',
-                uri: 'https://reactnative.dev/img/tiny_logo.png'
+                title: '鋼の錬金術師',
+                uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
             },
         ],
         selectedItems: [
@@ -43,9 +43,9 @@ export default class SelectBookScreen extends React.Component {
 
     renderItem({item}) {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                 <Image 
-                    style={{ width: 100, height: 100 }}
+                    style={{ width: 100, height: 160 }}
                     source={{uri: item.uri}}
                 />
                 <Text>
@@ -59,7 +59,7 @@ export default class SelectBookScreen extends React.Component {
 
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
-                <Layout style={{flex: 1, padding: 24, paddingTop: 64}}>
+                <Layout style={{flex: 1, padding: 24}}>
 
                     <Layout style={{alignItems: 'center',flexDirection: "row", backgroundColor:"#ddd"}}>
                         <Layout style={{flex:1, paddingRight: 8}}>
@@ -84,7 +84,7 @@ export default class SelectBookScreen extends React.Component {
                                 <TouchableHighlight style={{flex: 1, paddingTop: 8}} onPress={() => this.addSelectedItem(item)}>
                                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                                             <Image 
-                                                style={{ width: 100, height: 100 }}
+                                                style={{ width: 100, height: 160 }}
                                                 source={{uri: item.uri}}
                                             />
                                             <Text>
@@ -95,22 +95,21 @@ export default class SelectBookScreen extends React.Component {
                             )}
                     />
 
-                    <Button onPress={() => this.props.navigation.navigate("SelectUser")}>
-                        次へ
-                    </Button>
-
                     <FlatList
-                        style={{flex: 1, height: 100}}
+                        style={{flex: 1}}
                         data={this.state.selectedItems}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
                         renderItem={this.renderItem}
                     />
+
+                    <Button onPress={() => this.props.navigation.navigate("SelectUser", {selectedBooks: this.state.selectedItems})}>
+                        次へ
+                    </Button>
     
                 </Layout>
             </ApplicationProvider>
         )
-
     }
 }
 
