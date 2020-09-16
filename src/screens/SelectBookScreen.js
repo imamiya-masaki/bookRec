@@ -36,7 +36,9 @@ export default class SelectBookScreen extends React.Component {
                     books: getItems,
                 });
             }
-        )
+        ).catch((error) => {
+            console.log(error);
+        }) 
     }
 
     addSelectedItem(item) {

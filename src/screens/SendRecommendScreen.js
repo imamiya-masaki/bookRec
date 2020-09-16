@@ -18,6 +18,37 @@ export default class SelectRecommendScreen extends React.Component {
         message: ""
     }
 
+    pressSend (selectedBooks, selectedUsers) {
+        for (let i=0; i<selectedUsers.length; i++) {
+            for (let j=0; j<selectedBooks.length; j++) {
+                const data = {
+                    "SenderId": 1,
+                    "ReceiverId": selectedUsers[i].id,
+                    "BookId": selectedBooks[j].id,
+                    "ReactionContentId" : 1
+                }
+
+                const param = {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
+                fetch('http://127.0.0.1:8080/recommend', param)
+                .then(res => {
+                })
+                .then(data => {
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }
+        }
+        this.props.navigation.navigate("Home")
+    }
+
     render() {
         const { selectedBooks, selectedUsers } = this.props.route.params
 
@@ -50,8 +81,7 @@ export default class SelectRecommendScreen extends React.Component {
                         />
                     </Layout>
 
-
-                    <Button onPress={() => this.props.navigation.navigate('Home')}>
+                    <Button onPress={() => this.pressSend(selectedBooks, selectedUsers)}>
                         送信する
                     </Button>
                 </Layout>
