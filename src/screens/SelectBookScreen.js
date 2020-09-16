@@ -14,6 +14,9 @@ import RecommendBookList from '../components/RecommendBookList';
 export default class SelectBookScreen extends React.Component {
 
     state = {
+        bookTitle: "",
+        books: [],
+        items: [],
         selectedBooks: [
         ],
     }
@@ -29,7 +32,8 @@ export default class SelectBookScreen extends React.Component {
                     getItems.push(result[i])
                 }
                 this.setState({
-                    books: getItems
+                    items: getItems,
+                    books: getItems,
                 });
             }
         )
@@ -41,6 +45,15 @@ export default class SelectBookScreen extends React.Component {
                 selectedBooks: this.state.selectedBooks.concat(item)
             })
         } 
+    }
+
+    search(bookTitle) {
+        if (bookTitle == "") {
+            this.setState({books: this.state.items})
+        } else {
+            let hitBooks = this.state.items.filter(item => item.title.includes(bookTitle))
+            this.setState({books: hitBooks})
+        }
     }
 
     renderImage(item) {
@@ -75,7 +88,7 @@ export default class SelectBookScreen extends React.Component {
                             />
                         </Layout>
                     
-                        <Button>
+                        <Button onPress={() => this.search(this.state.bookTitle)}>
                             検索
                         </Button>
 
