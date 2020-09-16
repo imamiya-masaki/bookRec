@@ -83,7 +83,7 @@ export default class SelectUserScreen extends React.Component {
                     <Layout style={styles.searchItems}>
                             <Layout style={{flex:1, paddingRight: 8}}>
                                 <Input
-                                    placeholder="User name"
+                                    placeholder="ユーザー名"
                                     onChangeText={text => this.setState({userName: text})}
                                 />
                             </Layout>
@@ -94,24 +94,24 @@ export default class SelectUserScreen extends React.Component {
                     </Layout>
 
                     <FlatList 
-                            data={this.state.users}
-                            keyExtractor={(item) => item.id}
-                            renderItem={ ({item}) => (
-                                <TouchableHighlight
+                        data={this.state.users}
+                        keyExtractor={(item) => item.id}
+                        renderItem={ ({item}) => (
+                            <TouchableHighlight
                                 onPress={() => this.addSelectedItem(item)}
                                 underlayColor='transparent'
-                                >
-                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>  
-                                        {this.renderImage(item)}
-                                        <Layout>
-                                            <Text>
-                                                {item.name}
-                                            </Text>
-                                        </Layout>
+                            >
+                                <Layout style={styles.userInfo}>  
+                                    {this.renderImage(item)}
+                                    <Layout>
+                                        <Text style={{padding: 16, fontSize: 24}}>
+                                            {item.name}
+                                        </Text>
                                     </Layout>
-                                </TouchableHighlight>
+                                </Layout>
+                            </TouchableHighlight>
 
-                            )}
+                        )}
                     />
 
                     <RecommendUserList selectedUsers={this.state.selectedUsers} />

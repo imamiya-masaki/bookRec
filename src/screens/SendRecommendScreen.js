@@ -24,20 +24,32 @@ export default class SelectRecommendScreen extends React.Component {
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout style={styles.container}>
-                    <Text>
-                        おすすめする本
-                    </Text>
-                    <RecommendBookList selectedBooks={selectedBooks} />
+                    <Layout>
+                        <Text style={styles.title}>
+                            おすすめする本
+                        </Text>
+                        <RecommendBookList selectedBooks={selectedBooks} />
+                    </Layout>
 
-                    <Text>
-                        本をおすすめするユーザー
-                    </Text>
-                    <RecommendUserList selectedUsers={selectedUsers} />
+                    <Layout style={{paddingTop: 32}}>
+                        <Text style={styles.title}>
+                            おすすめするユーザー
+                        </Text>
+                        <RecommendUserList selectedUsers={selectedUsers} />
+                    </Layout>
                     
-                    <Input
-                        placeholder="メッセージを入力"
-                        onChangeText={text => this.setState({message: text})}
-                    />
+                    <Layout style={{flex: 1, paddingTop: 32}}>
+                        <Text style={styles.title}>
+                            メッセージ
+                        </Text>
+                        <Input
+                            style={{paddingTop: 8}}
+                            placeholder="メッセージを入力"
+                            onChangeText={text => this.setState({message: text})}
+                            multiline
+                        />
+                    </Layout>
+
 
                     <Button onPress={() => this.props.navigation.navigate('Home')}>
                         送信する
@@ -52,5 +64,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 24,
+    },
+    title: {
+        fontSize: 24
     },
 })

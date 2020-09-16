@@ -28,11 +28,8 @@ export default class RecommendUserList extends React.Component {
     renderBook({item}) {
         const uri = item.uri ? item.uri : "https://i.imgur.com/v2pLOgS.jpg"
         return (
-            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
-                <Image 
-                    style={{ width: 50, height: 80, resizeMode: 'contain' }}
-                    source={{uri: uri}}
-                />
+            <Layout style={styles.userList}>
+                {this.renderImage(item)}
                 <Text>
                     {item.name}
                 </Text>
@@ -55,6 +52,12 @@ export default class RecommendUserList extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    userList: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 4,
+    },
     image: { 
         width: 50,
         height: 80,

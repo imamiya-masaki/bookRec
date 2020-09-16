@@ -83,7 +83,7 @@ export default class SelectBookScreen extends React.Component {
                     <Layout style={styles.searchItems}>
                         <Layout style={{flex:1, paddingRight: 8}}>
                             <Input
-                                placeholder="Book"
+                                placeholder="タイトル"
                                 onChangeText={text => this.setState({bookTitle: text})}
                             />
                         </Layout>
@@ -105,7 +105,7 @@ export default class SelectBookScreen extends React.Component {
                                 >
                                     <Layout style={styles.bookInfo}>
                                         {this.renderImage(item)}
-                                        <Text style={{fontSize: 24}}>
+                                        <Text style={{padding: 16, fontSize: 24}}>
                                             {item.title}
                                         </Text>
                                     </Layout>

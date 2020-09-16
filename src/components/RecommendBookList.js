@@ -28,7 +28,7 @@ export default class RecommendBookList extends React.Component {
     renderBook({item}) {
         const uri = item.uri ? item.uri : "https://i.imgur.com/v2pLOgS.jpg"
         return (
-            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
+            <Layout style={styles.bookList}>
                 {this.renderImage(item)}
                 <Text>
                     {item.title}
@@ -52,6 +52,12 @@ export default class RecommendBookList extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    bookList: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 4,
+    },
     image: { 
         width: 50,
         height: 80,

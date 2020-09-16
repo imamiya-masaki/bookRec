@@ -1,11 +1,11 @@
 import React from "react";
-import {StyleSheet } from "react-native";
+import {StyleSheet, TouchableHighlight } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import * as eva from "@eva-design/eva";
 import {
     ApplicationProvider,
     Layout,
     Button,
-    Icon,
 } from "@ui-kitten/components";
 
 export default class RecommendButton extends React.Component {
@@ -16,7 +16,16 @@ export default class RecommendButton extends React.Component {
         return (
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout style={styles.container}>
-                    <Button style={styles.circleButton} onPress={onPress} />
+                    <TouchableHighlight
+                        style={styles.circleButton}
+                        onPress={onPress}
+                        underlayColor='transparent'
+                    >
+                        <Ionicons name='md-thumbs-up' size={24} color='white' />
+                    </TouchableHighlight>
+                    {/* <Button style={styles.circleButton} onPress={onPress}>
+                        <Ionicons name='md-thumbs-up' size={24} />
+                    </Button> */}
                 </Layout>
             </ApplicationProvider>
         );
@@ -37,6 +46,7 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#3366ff",
         shadowColor: "#000",
         shadowOffset: {width: 2, height: 2},
         shadowOpacity: 0.2,
