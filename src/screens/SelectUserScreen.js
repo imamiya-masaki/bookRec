@@ -40,6 +40,24 @@ export default class SelectUserScreen extends React.Component {
         }
     }
 
+    renderImage(item) {
+        if (item.uri) {
+            return (
+                <Image 
+                    style={{ width: 100, height: 160 }}
+                    source={{uri:uri}}
+                />
+            )
+        } else {
+            return (
+                <Image 
+                    style={{ width: 100, height: 160 }}
+                    source={require('../../assets/noimage.jpg')}
+                />
+            )
+        }
+    }
+
     render() {
         const { selectedBooks } = this.props.route.params
 
@@ -67,11 +85,8 @@ export default class SelectUserScreen extends React.Component {
                                 onPress={() => this.addSelectedItem(item)}
                                 underlayColor='transparent'
                                 >
-                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>                                        
-                                        <Image 
-                                            style={{ width: 100, height: 100 }}
-                                            source={{uri: "https://i.imgur.com/AkNqIrO.png"}}
-                                        />
+                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>  
+                                        {this.renderImage(item)}
                                         <Layout>
                                             <Text>
                                                 {item.name}
@@ -107,5 +122,9 @@ const styles = StyleSheet.create({
     searchItems: {
         alignItems: 'center',
         flexDirection: "row",
+    },
+    userInfo: {
+        flex: 1,
+        flexDirection: 'row',
     }
 })

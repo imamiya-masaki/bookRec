@@ -1,23 +1,35 @@
 import React from "react";
-import {StyleSheet, FlatList, View, Image, TouchableHighlight } from "react-native";
-import * as eva from "@eva-design/eva";
+import {StyleSheet, FlatList, Image } from "react-native";
 import {
-    ApplicationProvider,
     Layout,
-    Button,
     Text,
-    Input,
 } from "@ui-kitten/components";
 
 export default class RecommendBookList extends React.Component {
 
+    renderImage(item) {
+        if (item.uri) {
+            return (
+                <Image 
+                    style={styles.image}
+                    source={{uri:uri}}
+                />
+            )
+        } else {
+            return (
+                <Image 
+                    style={styles.image}
+                    source={require('../../assets/noimage.jpg')}
+                />
+            )
+        }
+    }
+
     renderBook({item}) {
+        const uri = item.uri ? item.uri : "https://i.imgur.com/v2pLOgS.jpg"
         return (
             <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
-                <Image 
-                    style={{ width: 50, height: 80, resizeMode: 'contain' }}
-                    source={{uri: "https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg"}}
-                />
+                {this.renderImage(item)}
                 <Text>
                     {item.title}
                 </Text>
@@ -26,7 +38,6 @@ export default class RecommendBookList extends React.Component {
     }
 
     render() {
-        console.log(this.props.selectedBooks);
         return (
             <Layout>
                 <FlatList
@@ -39,3 +50,11 @@ export default class RecommendBookList extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    image: { 
+        width: 50,
+        height: 80,
+        resizeMode: 'contain' 
+    },
+})

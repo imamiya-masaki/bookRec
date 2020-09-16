@@ -14,25 +14,6 @@ import RecommendBookList from '../components/RecommendBookList';
 export default class SelectBookScreen extends React.Component {
 
     state = {
-        // books: [
-        //     {
-        //         id: '1',
-        //         title: '鋼の錬金術師',
-        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-        //     },{
-        //         id: '2',
-        //         title: '鋼の錬金術師',
-        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-        //     },{
-        //         id: '3',
-        //         title: '鋼の錬金術師',
-        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-        //     },{
-        //         id: '4',
-        //         title: '鋼の錬金術師',
-        //         uri: 'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-        //     },
-        // ],
         selectedBooks: [
         ],
     }
@@ -45,7 +26,6 @@ export default class SelectBookScreen extends React.Component {
             (result) => {
                 let getItems = []
                 for (let i = 0; i<result.length; i++) {
-                    console.log(result[i]);
                     getItems.push(result[i])
                 }
                 this.setState({
@@ -61,6 +41,24 @@ export default class SelectBookScreen extends React.Component {
                 selectedBooks: this.state.selectedBooks.concat(item)
             })
         } 
+    }
+
+    renderImage(item) {
+        if (item.uri) {
+            return (
+                <Image 
+                    style={{ width: 100, height: 160 }}
+                    source={{uri:uri}}
+                />
+            )
+        } else {
+            return (
+                <Image 
+                    style={{ width: 100, height: 160 }}
+                    source={require('../../assets/noimage.jpg')}
+                />
+            )
+        }
     }
 
     render() {
@@ -92,14 +90,11 @@ export default class SelectBookScreen extends React.Component {
                                     onPress={() => this.addSelectedItem(item)}
                                     underlayColor='transparent'
                                 >
-                                    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                                            <Image 
-                                                style={{ width: 100, height: 160 }}
-                                                source={{uri: "https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg"}}
-                                            />
-                                            <Text>
-                                                {item.title}
-                                            </Text>
+                                    <Layout style={styles.bookInfo}>
+                                        {this.renderImage(item)}
+                                        <Text style={{fontSize: 24}}>
+                                            {item.title}
+                                        </Text>
                                     </Layout>
                                 </TouchableHighlight>
                             )}
@@ -125,5 +120,9 @@ const styles = StyleSheet.create({
     searchItems: {
         alignItems: 'center',
         flexDirection: "row",
-    }
+    },
+    bookInfo: {
+        flex: 1,
+        flexDirection: 'row',
+    },
 })
