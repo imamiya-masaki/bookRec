@@ -34,11 +34,12 @@ export default class RecommendCard extends React.Component {
         for (let i=0; i<data.Books.length; i++) {
             datas.push({reactions: data.Reactions, books: data.Books})
         }
+        console.log(data)
         return (
             <Card>
                 <Layout style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
                     <Avatar size='giant' source={{uri: 'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'}}/>
-                    <Text style={{padding: 10}}>{data.Username}</Text>
+                    <Text style={{padding: 10}}>{data.User.username}</Text>
                 </Layout>
                 
                 <Layout style={{flexDirection: 'row'}}>
