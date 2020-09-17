@@ -13,7 +13,7 @@ export default class RecommendCard extends React.Component {
 
     renderImage( image ) {
         let uri;
-        if (image == null) {
+        if (image == null || image == "") {
             uri = "https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg"
         } else {
             uri = image
@@ -27,25 +27,27 @@ export default class RecommendCard extends React.Component {
     render() {
         let { data, navDetail } = this.props;
         let datas = [];
-
+        // for (let i=0; i<data.length; i++) {
+        //     datas.push({reactionImages: data[i].reactionImages, books: data[i].books})
+        //     //本のデータが決まったら
+        // }
         for (let i=0; i<data.Books.length; i++) {
-            datas.push({reactionImages: data.Reactions[i].Uri, bookImages: data.Books[i].uri})
+            datas.push({reactions: data.Reactions, books: data.Books})
         }
-        console.log(datas);
         return (
             <Card>
                 <Layout style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
                     <Avatar size='giant' source={{uri: 'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'}}/>
-                    <Text style={{padding: 10}}>{data.User.username}</Text>
+                    <Text style={{padding: 10}}>{data.Username}</Text>
                 </Layout>
                 
                 <Layout style={{flexDirection: 'row'}}>
                     {datas.map((data, index) => (
                         <Layout key={index}>
-                            <Avatar size='giant' source={{uri: data.reactionImages[index]}}/>
-                            <TouchableHighlight onPress={() => navDetail(1)} underlayColor='transparent'>
+                            <Avatar size='giant' source={{uri: data.reactions[index].Uri}}/>
+                            <TouchableHighlight onPress={() => navDetail(data.books[index])} underlayColor='transparent'>
                                 {/* <Image style={styles.book_image} source={{uri: data.books.bookImages[index]}}/> */}
-                                {this.renderImage(data.bookImages[index])}
+                                {this.renderImage(data.books[index].uri)}
                             </TouchableHighlight>
                         </Layout>
                     ))}

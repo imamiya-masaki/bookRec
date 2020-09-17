@@ -67,7 +67,7 @@ export default class RecommendByMeScreen extends React.Component {
         return (
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout>
-                    <RecommendBookComponent　data={this.state.data} navDetail={(bookId) => this.props.navigation.navigate('BookDetail', {bookId: bookId})}/>
+                    <RecommendBookComponent　data={this.state.data} navDetail={(book) => this.props.navigation.navigate('BookDetail', {book: book})}/>
                 </Layout>
             </ApplicationProvider>
         )
