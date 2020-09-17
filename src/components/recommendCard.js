@@ -9,34 +9,43 @@ export default class RecommendCard extends React.Component {
         super(props);
 
         this.state = {};
-
-        this.cardClick = this.cardClick.bind(this)
     }
 
-    cardClick() {
-        console.log('press !!')
+    renderImage( image ) {
+        let uri;
+        if (image == null) {
+            uri = "https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg"
+        } else {
+            uri = image
+        }
+        console.log(uri);
+        return(
+            <Image style={styles.book_image} source={{uri: uri}} />
+        )
     }
 
     render() {
         let { data, navDetail } = this.props;
         let datas = [];
-        for (let i=0; i<data.length; i++) {
-            datas.push({reactionImages: data[i].reactionImages, books: data[i].books})
-            //本のデータが決まったら
+
+        for (let i=0; i<data.Books.length; i++) {
+            datas.push({reactionImages: data.Reactions[i].Uri, bookImages: data.Books[i].uri})
         }
+        console.log(datas);
         return (
-            <Card onPress={() => this.cardClick()}>
+            <Card>
                 <Layout style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
                     <Avatar size='giant' source={{uri: 'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'}}/>
-                    <Text style={{padding: 10}}>{data.Username}</Text>
+                    <Text style={{padding: 10}}>{data.User.username}</Text>
                 </Layout>
                 
                 <Layout style={{flexDirection: 'row'}}>
                     {datas.map((data, index) => (
                         <Layout key={index}>
                             <Avatar size='giant' source={{uri: data.reactionImages[index]}}/>
-                            <TouchableHighlight style={{backgroundColor:"blue"}} onPress={navDetail(data.books.bookId)} underlayColor='transparent'>
-                                <Image style={styles.book_image} source={{uri: data.books.bookImages[index]}}/>
+                            <TouchableHighlight onPress={() => navDetail(1)} underlayColor='transparent'>
+                                {/* <Image style={styles.book_image} source={{uri: data.books.bookImages[index]}}/> */}
+                                {this.renderImage(data.bookImages[index])}
                             </TouchableHighlight>
                         </Layout>
                     ))}

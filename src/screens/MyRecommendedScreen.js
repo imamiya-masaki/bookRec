@@ -6,50 +6,59 @@ import RecommendBookComponent from '../components/recommendBookComponent'
 
 const MYUSERID = 1
 
-let images = [
-    'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg',
-    'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
-];
+// let images = [
+//     'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg',
+//     'https://www.cmoa.jp/data/image/title/title_0000037770/VOLUME/100000377700001.jpg'
+// ];
 
-let reactions = [
-    'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png',
-    'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'
-];
+// let reactions = [
+//     'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png',
+//     'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'
+// ];
 
-let user = {
-    username: 'username',
-    images: images,
-    reactions: reactions
-}
+// let user = {
+//     username: 'username',
+//     images: images,
+//     reactions: reactions
+// }
 
-let data = []
-data.push(user)
-data.push(user)
-data.push(user)
+// let data = []
+// data.push(user)
+// data.push(user)
+// data.push(user)
 export default class RecommendByMeScreen extends React.Component {
+
+    state = {
+        data: [],
+    }
+
     constructor(props) {
         super(props);
 
-        this.state = {};
-
         this.getRecommendData = this.getRecommendData.bind(this)
+        this.getRecommendData()
     }
 
     getRecommendData() {
-        const url = 'http://192.168.3.2:8080/my_recommend?'
+        // recommended
+        const url = 'http://54.178.65.84:8080/recommend_info?'
         const params = {
             sender_id: MYUSERID
         };
         const query_params = new URLSearchParams(params); 
 
-        return fetch(url+query_params)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        fetch(url+query_params)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            let getItems = []
+            for (let i=0; i<responseJson.length; i++) {
+                getItems.push(responseJson[i])
+            }
+            this.setState({data: getItems})
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     render() {
@@ -58,7 +67,7 @@ export default class RecommendByMeScreen extends React.Component {
         return (
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout>
-                    <RecommendBookComponent　data={data}/>
+                    <RecommendBookComponent　data={this.state.data} navDetail={(bookId) => this.props.navigation.navigate('BookDetail', {bookId: bookId})}/>
                 </Layout>
             </ApplicationProvider>
         )
