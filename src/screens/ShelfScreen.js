@@ -28,7 +28,7 @@ export default class ShelfScreen extends React.Component {
     //   this.props.navigation.navigate('BookDetail', {selectedBook: data})
     // }
     componentDidMount () {
-        const url = 'http://54.178.65.84:8080/book/'
+        const url = 'http://127.0.0.1:8080/book/'
         console.log('url', url)
         fetch(url)
         .then(res => res.json())

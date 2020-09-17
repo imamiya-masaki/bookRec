@@ -77,9 +77,13 @@ export default function App() {
     <NavigationContainer>
       <RootStack.Navigator mode='modal' >
         <RootStack.Screen
+          name='Login'
+          component={LoginScreen}
+        />
+        <RootStack.Screen
           name='Tab'
           component={TabScreen}
-          options={({route}) => ({headerTitle: getHeaderTitle(route)})}
+          options={({route}) => ({headerTitle: getHeaderTitle(route), headerLeft: null})}
         />
         <RootStack.Screen
           name='RecommendStack'

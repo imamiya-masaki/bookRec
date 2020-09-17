@@ -15,6 +15,7 @@ export default class LoginScreen extends React.Component {
 
     loginAc() {
         setTwitterId(this.state.username)
+        this.props.navigation.replace('Tab');
     }
      
     render() {
