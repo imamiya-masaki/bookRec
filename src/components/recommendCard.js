@@ -5,6 +5,18 @@ import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import { Avatar, Card } from '@ui-kitten/components';
 
 export default class RecommendCard extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {};
+
+        this.cardClick = this.cardClick.bind(this)
+    }
+
+    cardClick() {
+        console.log('press !!')
+    }
+
     render() {
         let data = this.props.data;
 
@@ -12,7 +24,7 @@ export default class RecommendCard extends React.Component {
         let reactions = data.reactions;
 
         return (
-            <Card>
+            <Card onPress={() => this.cardClick()}>
                 <Layout style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
                     <Avatar size='giant' source={{uri: 'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'}}/>
                     <Text style={{padding: 10}}>{data.username}</Text>
