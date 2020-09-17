@@ -34,7 +34,7 @@ export default class StoreStackScreen extends React.Component {
           }}
         />
         <StoreStack.Screen
-          name="BookDetail_"
+          name="BookDetail"
           component={BookDetailScreen}
           options={{
             title: "ストア",
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
   rightIcon: {
     position: "absolute",
     right: 20,
-    // paddingRight: 10,
   },
   modal: {
     position: "absolute",
