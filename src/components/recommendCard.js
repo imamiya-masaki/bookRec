@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableHighlight } from 'react-native';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import { Avatar, Card } from '@ui-kitten/components';
@@ -18,23 +18,26 @@ export default class RecommendCard extends React.Component {
     }
 
     render() {
-        let data = this.props.data;
-
-        let images = data.images;
-        let reactions = data.reactions;
-
+        let { data, navDetail } = this.props;
+        let datas = [];
+        for (let i=0; i<data.length; i++) {
+            datas.push({reactionImages: data[i].reactionImages, books: data[i].books})
+            //本のデータが決まったら
+        }
         return (
             <Card onPress={() => this.cardClick()}>
                 <Layout style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
                     <Avatar size='giant' source={{uri: 'https://akveo.github.io/react-native-ui-kitten/images/Artboard-1.png'}}/>
-                    <Text style={{padding: 10}}>{data.username}</Text>
+                    <Text style={{padding: 10}}>{data.Username}</Text>
                 </Layout>
                 
                 <Layout style={{flexDirection: 'row'}}>
-                    {images.map((image, index) => (
+                    {datas.map((data, index) => (
                         <Layout key={index}>
-                            <Avatar size='giant' source={{uri: reactions[index]}}/>
-                            <Image style={styles.book_image} source={{uri: image}}/>
+                            <Avatar size='giant' source={{uri: data.reactionImages[index]}}/>
+                            <TouchableHighlight style={{backgroundColor:"blue"}} onPress={navDetail(data.books.bookId)} underlayColor='transparent'>
+                                <Image style={styles.book_image} source={{uri: data.books.bookImages[index]}}/>
+                            </TouchableHighlight>
                         </Layout>
                     ))}
                 </Layout>

@@ -8,11 +8,10 @@ import RecommendCard from '../components/recommendCard'
 
 export default class RecommendBookComponent extends React.Component {
     render() {
-        let data = this.props.data;
-
+        let { data, navDetail } = this.props
         const renderItem = ({ item, index }) => {
             return (
-                <RecommendCard data={item} />
+                <RecommendCard data={item} navDetail={navDetail}/>
             )
         }
 
