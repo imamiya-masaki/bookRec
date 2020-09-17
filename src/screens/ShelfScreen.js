@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout } from '@ui-kitten/components';
 import { Image ,TouchableOpacity, StyleSheet, ScrollView } from 'react-native' ; 
+import RecommendButton from '../components/RecommendButton';
 
 export default class ShelfScreen extends React.Component {
   state = {books: []}
@@ -112,6 +113,7 @@ export default class ShelfScreen extends React.Component {
               <ScrollView horizontal showsVerticalScrollIndicator={false}>
                 {set}
               </ScrollView>
+              <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Home"}})}/>
             </Layout>
           </ApplicationProvider>
         )
