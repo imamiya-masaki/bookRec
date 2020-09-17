@@ -29,7 +29,7 @@ export default class ShelfScreen extends React.Component {
     //   this.props.navigation.navigate('BookDetail', {selectedBook: data})
     // }
     componentDidMount () {
-        const url = 'http://127.0.0.1:8080/book/'
+        const url = "http://54.178.65.84:8080/book/";
         console.log('url', url)
         fetch(url)
         .then(res => res.json())
@@ -38,8 +38,9 @@ export default class ShelfScreen extends React.Component {
             // console.log('items', result)
             console.log('check', result[0].author)
             let getItems = []
-            for (let i= 0; i<result.length; i++) {
-              getItems.push(result[i])
+            for (let i = 0; i < result.length; i++) {
+              if (!result[i].title == "" && !result[i].author == "")
+                  getItems.push(result[i]);
             }
             this.setState({
               isLoaded: true,
@@ -72,16 +73,16 @@ export default class ShelfScreen extends React.Component {
       let itemSeparaite = [[]]
       let index = 0
       for (let item of items) {
-        if (itemSeparaite[index].length >=4) {
+        if (itemSeparaite[index].length >=5) {
           index += 1
         }
         let itemImage = "https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg"
-        if (itemSeparaite[index].hasOwnProperty('uri') && itemSeparaite[index].uri.length > 0) {
-          itemImage = itemSeparaite[index].uri
+        if (item.hasOwnProperty('uri') && item.uri.length > 0) {
+          itemImage = item.uri
         }
         itemSeparaite[index].push(
           <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('BookDetail', {book: item})}}>
+            onPress={() => {this.props.navigation.navigate('BookDetailStack',{screen : "BookDetail", params: {book: item}} )}}>
           <Image
               style={styles.book_image}
               source={{

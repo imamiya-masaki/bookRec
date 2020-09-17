@@ -10,11 +10,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import RecommendScreen from "./src/screens/RecommendScreen";
-import ShelfStackScreen from "./src/screens/ShelfStackScreen";
+import ShelfScreen from "./src/screens/ShelfScreen";
 import StoreScreen from "./src/screens/StoreScreen";
 import StoreStackScreen from "./src/screens/StoreStackScreen";
 import RecommendStackScreen from "./src/screens/RecommendStackScreen";
-import myBookStackScreen from "./src/screens/myBookStackScreen";
+import BookDetailStackScreen from "./src/screens/BookDetailStackScreen";
 import HomeStackScreen from "./src/screens/HomeStackScreen";
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -52,7 +52,7 @@ function TabScreen() {
       />
       <Tab.Screen
         name="Shelf"
-        component={ShelfStackScreen}
+        component={ShelfScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="ios-book" color={color} size={size} />
@@ -90,9 +90,13 @@ export default function App() {
           }
         />
         <RootStack.Screen
-          name="myBookStack"
-          component={myBookStackScreen}
-          options={({ route }) => ({ headerTitle: getHeaderTitle(route) })}
+          name="BookDetailStack"
+          component={BookDetailStackScreen}
+          options={({ route, navigation }) => ({
+             headerTitle: getHeaderTitle(route),
+            headerLeft: (props) => (
+            <HeaderBackButton  onPress={() => navigation.goBack()} />
+          )})}
         />
         <RootStack.Screen
           name="StoreStack"
