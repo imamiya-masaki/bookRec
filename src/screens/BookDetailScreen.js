@@ -10,6 +10,18 @@ import {
 import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
 export default class BookDetailScreen extends React.Component {
+
+
+  renderImage(uri) {
+    if (uri == null || uri == "") {
+      uri = 'https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg'
+    }
+    return (
+      <Image style={{ width: 320, height: 320 }} source={{uri: uri}} />
+    )
+  }
+
+
   static navigationOptions = {
     title:"BookDetail"
   }
@@ -17,17 +29,18 @@ export default class BookDetailScreen extends React.Component {
     super(props);
     this.state = { myinput: '' };
   }
+
   render() {
+
+    const { book } = this.props.route.params
+
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <Layout style={styles.container}>
-          <Image
-            style={{ width: 320, height: 320 }}
-            source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
-          />
 
+          {this.renderImage(book.uri)}
           <Layout style={styles.bookTitle}>
-            <Text style={{ fontSize: 32 }}>React Native</Text>
+            <Text style={{ fontSize: 32 }}>{book.title}</Text>
           </Layout>
 
           <Layout style={styles.buttonContainer}>
