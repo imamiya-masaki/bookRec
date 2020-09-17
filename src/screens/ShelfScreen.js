@@ -59,35 +59,28 @@ export default class ShelfScreen extends React.Component {
     if (this.state.books.length == 0) {
       // console.log('check', this.state)
       // this.fetchBook()
-    }
     console.log("checkState", this.state.books);
     return this.state.books;
   }
   handleClick() {
     this.props.history.push("/secondpage");
   }
-  render() {
-    const { error, isLoaded, items } = this.state;
-    let itemSeparaite = [[]];
-    let index = 0;
-    for (let item of items) {
-      if (itemSeparaite[index].length >= 4) {
-        index += 1;
-      }
-      let itemImage =
-        "https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg";
-      if (
-        itemSeparaite[index].hasOwnProperty("uri") &&
-        itemSeparaite[index].uri.length > 0
-      ) {
-        itemImage = itemSeparaite[index].uri;
-      }
-      itemSeparaite[index].push(
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate("BookDetail");
-          }}
-        >
+
+    render() {
+      const {error, isLoaded, items} = this.state;
+      let itemSeparaite = [[]]
+      let index = 0
+      for (let item of items) {
+        if (itemSeparaite[index].length >=4) {
+          index += 1
+        }
+        let itemImage = "https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg"
+        if (itemSeparaite[index].hasOwnProperty('uri') && itemSeparaite[index].uri.length > 0) {
+          itemImage = itemSeparaite[index].uri
+        }
+        itemSeparaite[index].push(
+          <TouchableOpacity
+          onPress={() => {this.props.navigation.navigate('BookDetail', {book: item})}}>
           <Image
             style={styles.book_image}
             source={{

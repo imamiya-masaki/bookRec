@@ -11,7 +11,6 @@ import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
 export default class BookDetailScreen extends React.Component {
 
-
   renderImage(uri) {
     if (uri == null || uri == "") {
       uri = 'https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg'
@@ -21,13 +20,8 @@ export default class BookDetailScreen extends React.Component {
     )
   }
 
-
-  static navigationOptions = {
-    title:"BookDetail"
-  }
   constructor(props){
     super(props);
-    this.state = { myinput: '' };
   }
 
   render() {
@@ -44,7 +38,7 @@ export default class BookDetailScreen extends React.Component {
           </Layout>
 
           <Layout style={styles.buttonContainer}>
-            <Button onPress={() => {}}>サンプル</Button>
+            <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book})}>サンプル</Button>
 
             <Button onPress={() => {}}>購入する</Button>
           </Layout>

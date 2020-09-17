@@ -10,7 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import RecommendScreen from "./src/screens/RecommendScreen";
-import ShelfScreen from "./src/screens/ShelfScreen";
+import ShelfStackScreen from "./src/screens/ShelfStackScreen";
 import StoreScreen from "./src/screens/StoreScreen";
 import StoreStackScreen from "./src/screens/StoreStackScreen";
 import RecommendStackScreen from "./src/screens/RecommendStackScreen";
@@ -52,7 +52,7 @@ function TabScreen() {
       />
       <Tab.Screen
         name="Shelf"
-        component={ShelfScreen}
+        component={ShelfStackScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="ios-book" color={color} size={size} />
