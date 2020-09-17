@@ -80,7 +80,7 @@ export default class ShelfScreen extends React.Component {
         }
         itemSeparaite[index].push(
           <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('BookDetail')}}>
+          onPress={() => {this.props.navigation.navigate('BookDetail', {book: item})}}>
           <Image
               style={styles.book_image}
               source={{
