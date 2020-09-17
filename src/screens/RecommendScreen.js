@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MyRecommendScreen from './MyRecommendScreen';
 import MyRecommendedScreen from './MyRecommendedScreen';
 import BookDetailScreen from './BookDetailScreen';
+import BookReadScreen from './BookReadScreen'
 
 const RecommendStack = createStackNavigator();
 const RecommendedStack = createStackNavigator();
@@ -17,6 +18,7 @@ function RecommendStackScreen() {
         <RecommendStack.Navigator screenOptions={{headerShown:false}} >
             <RecommendStack.Screen name="MyRecommend" component={MyRecommendScreen} />
             <RecommendStack.Screen name="BookDetail" component={BookDetailScreen} />
+            <RecommendStack.Screen name="BookRead" component={BookReadScreen} />
         </RecommendStack.Navigator>
     )
 }
@@ -26,6 +28,7 @@ function RecommendedStackScreen() {
         <RecommendedStack.Navigator screenOptions={{headerShown:false}}>
             <RecommendedStack.Screen name="MyRecommended" component={MyRecommendedScreen} />
             <RecommendedStack.Screen name="BookDetail" component={BookDetailScreen} />
+            <RecommendedStack.Screen name="BookRead" component={BookReadScreen} />
         </RecommendedStack.Navigator>
     )
 }
