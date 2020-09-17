@@ -11,6 +11,7 @@ import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
 export default class BookDetailScreen extends React.Component {
 
+
   renderImage(uri) {
     if (uri == null || uri == "") {
       uri = 'https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg'
@@ -18,6 +19,15 @@ export default class BookDetailScreen extends React.Component {
     return (
       <Image style={{ width: 320, height: 320 }} source={{uri: uri}} />
     )
+  }
+
+
+  static navigationOptions = {
+    title:"BookDetail"
+  }
+  constructor(props){
+    super(props);
+    this.state = { myinput: '' };
   }
 
   render() {
