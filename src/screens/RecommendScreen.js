@@ -8,11 +8,9 @@ import MyRecommendScreen from './MyRecommendScreen';
 import MyRecommendedScreen from './MyRecommendedScreen';
 import BookDetailScreen from './BookDetailScreen';
 import BookReadScreen from './BookReadScreen'
-
 const RecommendStack = createStackNavigator();
 const RecommendedStack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
-
 function RecommendStackScreen() {
     return (
         <RecommendStack.Navigator screenOptions={{headerShown:false}} >
@@ -22,7 +20,6 @@ function RecommendStackScreen() {
         </RecommendStack.Navigator>
     )
 }
-
 function RecommendedStackScreen() {
     return (
         <RecommendedStack.Navigator screenOptions={{headerShown:false}}>
@@ -32,7 +29,6 @@ function RecommendedStackScreen() {
         </RecommendedStack.Navigator>
     )
 }
-
 export default class RecommendScreen extends React.Component {
     render() {
         return (

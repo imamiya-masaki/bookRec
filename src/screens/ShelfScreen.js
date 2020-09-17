@@ -3,6 +3,7 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text,Card} from '@ui-kitten/components';
 import axios from 'axios';
 import {Image, Button,TouchableOpacity, StyleSheet} from 'react-native' ; 
+import Header from "../components/Header";
 import BookDetailScreen from './BookDetailScreen';
 // import Navigation from 'react-native-navigation';
 import createStackNavigator from '@react-navigation/stack';

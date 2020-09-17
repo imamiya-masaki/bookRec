@@ -17,31 +17,125 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Icon5 from "react-native-vector-icons/FontAwesome5";
 import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
+import HelpModal from "../components/HelpModal";
 
-// import ReactionScreen from "./ReactionScreen";
 export default class HomeScreen extends React.Component {
   _card = (el) => {
     console.log("Card: " + el.name);
   };
 
   state = {
-    sms: true,
     isModalVisible: false,
   };
 
   toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: [],
+      userinfo: [],
+    };
+  }
+
+  componentDidMount() {
+    // const url = 'http://127.0.0.1:8080/book/'
+    const url = "http://54.178.65.84:8080/dashboard_info";
+    fetch(url)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log("check", result.CouponCount);
+          this.setState({
+            isLoaded: true,
+            items: result,
+          });
+          console.log("items", items);
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error: error,
+          });
+        }
+      );
+    const userurl = "http://54.178.65.84:8080/users/:0";
+    console.log("url", userurl);
+    fetch(userurl)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log("username", result.username);
+          this.setState({
+            isLoaded: true,
+            userinfo: result,
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error: error,
+          });
+        }
+      );
+  }
 
   render() {
+    const { error, isLoaded, items, onPress, userinfo } = this.state;
+    console.log("userinfo", userinfo);
+    console.log("couponcount", items.CouponCount);
+    let reactions = 0;
+    let name;
+    if (userinfo.username == "") {
+      name = "unknown";
+    } else {
+      name = userinfo.username;
+    }
+    if (items.Reactions == null) {
+      reactions = 0;
+    } else {
+      reactions = Reactions.length;
+    }
+    const board = [
+      {
+        name: `Recommend
+            ×${items.RecommendCount}`,
+        background: "#3498db",
+        icon: "user",
+      },
+      {
+        name: `Recommen-
+        ded×${items.RecommendedCount}`,
+        background: "#3498db",
+        icon: "user",
+      },
+      {
+        name: `Reactions×${items.ReactionCount}`,
+        background: "#3498db",
+        icon: "heart",
+      },
+      {
+        name: `Coupons×${items.CouponCount}`,
+        background: "#3498db",
+        icon: "ticket",
+      },
+      {
+        name: `Books×${items.CouponCount}`,
+        background: "#3498db",
+        icon: "book",
+      },
+      { name: `Friends×${reactions}`, background: "#3498db", icon: "group" },
+    ];
     return (
-      // <ReactionScreen />
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "#eee" }}>
-          <Header name="ホーム" />
+          {/* <Header name="ホーム" /> */}
           <View
             style={{
-              marginTop: 100,
+              marginTop: 20,
               marginLeft: 20,
               flexDirection: "row",
               marginBottom: 20,
@@ -51,9 +145,9 @@ export default class HomeScreen extends React.Component {
               size="large"
               title="Icon"
               rounded
-              source={require("../../assets/dog.jpg")}
+              source={require("../../assets/unknown-person-icon-4.png")}
             />
-            <Text style={{ alignSelf: "center", marginLeft: 40 }}>名前</Text>
+            <Text style={{ alignSelf: "center", marginLeft: 40 }}>{name}</Text>
           </View>
           <ScrollView>
             <View style={{ marginTop: 0, width: "100%", alignSelf: "center" }}>
@@ -86,18 +180,18 @@ export default class HomeScreen extends React.Component {
         ></Layout>
         <View style={styles.container}>
           <Dashboard
-            items={items}
+            items={board}
             background={true}
             card={this._card}
             column={3}
           />
+          {/* {modal} */}
         </View>
       </ApplicationProvider>
     );
   }
 }
 
-//日本語化と横幅指定ができてない.文字の位置もおかしい。(webとandroidで違う、、)
 const items = [
   { name: "recommend", background: "#3498db", icon: "user" },
   { name: "recommended", background: "#3498db", icon: "user" },
@@ -113,6 +207,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#ecf0f1",
     position: "absolute",
     bottom: 0,
+  },
+  modal: {
+    position: "absolute",
+    bottom: 80,
+    height: 150,
   },
 });
 

@@ -11,7 +11,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 // import BootstrapStyleSheet from "react-native-bootstrap-styles";
 import AnonymousModal from "./AnonymousModal";
-import TutorialModal from "./TutorialModal";
+import HelpModal from "./HelpModal";
 import Modal from "react-native-modal";
 
 export default class Header extends React.Component {
@@ -34,7 +34,7 @@ export default class Header extends React.Component {
           <Modal isVisible={this.state.isModalVisible}>
             {/* <ScrollView> */}
             <View style={styles.modal}>
-              <TutorialModal nav={this} />
+              <HelpModal nav={this} />
             </View>
             {/* </ScrollView> */}
           </Modal>
