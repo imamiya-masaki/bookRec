@@ -5,13 +5,13 @@ import StoreScreen from "./StoreScreen";
 import BookDetailScreen from "./BookDetailScreen";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const BookStack = createStackNavigator();
+const StoreStack = createStackNavigator();
 
-export default class BookStackScreen extends React.Component {
+export default class StoreStackScreen extends React.Component {
   render() {
     return (
-      <BookStack.Navigator>
-        <BookStack.Screen
+      <StoreStack.Navigator>
+        <StoreStack.Screen
           name="Store"
           component={StoreScreen}
           options={{
@@ -33,8 +33,8 @@ export default class BookStackScreen extends React.Component {
             ),
           }}
         />
-        <BookStack.Screen
-          name="BookDetail"
+        <StoreStack.Screen
+          name="BookDetail_"
           component={BookDetailScreen}
           options={{
             title: "ストア",
@@ -46,7 +46,7 @@ export default class BookStackScreen extends React.Component {
             headerStatusBarHeight: 20,
           }}
         />
-      </BookStack.Navigator>
+      </StoreStack.Navigator>
     );
   }
 }

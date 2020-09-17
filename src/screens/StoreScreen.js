@@ -39,10 +39,8 @@ export default class StoreScreen extends React.Component {
           console.log("check", result[0].uri);
           let getItems = [];
           for (let i = 0; i < result.length; i++) {
-            // for (let i = 0; i < 3; i++) {
             if (result[i].author != "") {
               getItems.push(result[i]);
-              console.log("count", i);
             }
           }
           this.setState({
