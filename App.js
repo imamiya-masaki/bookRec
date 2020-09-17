@@ -11,7 +11,7 @@ import RecommendScreen from "./src/screens/RecommendScreen";
 import ShelfScreen from "./src/screens/ShelfScreen";
 import StoreScreen from "./src/screens/StoreScreen";
 import RecommendStackScreen from './src/screens/RecommendStackScreen';
-
+import myBookStackScreen from './src/screens/myBookStackScreen';
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 
@@ -83,6 +83,13 @@ export default function App() {
           options={
             ({route}) => ({headerTitle: getHeaderTitle(route)}),
             {headerBackTitle:"閉じる"}}
+          />
+        <RootStack.Screen
+        name='myBookStack'
+        component={myBookStackScreen}
+        options={
+          ({route}) => ({headerTitle: getHeaderTitle(route)})
+        }
           />
       </RootStack.Navigator>
     </NavigationContainer>
