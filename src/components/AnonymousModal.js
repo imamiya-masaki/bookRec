@@ -2,6 +2,15 @@ import React from "react";
 import { View, Button, Dimensions } from "react-native";
 
 export default class AnonymousModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isModalVisible: false,
+    };
+  }
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
   render() {
     return (
       <View

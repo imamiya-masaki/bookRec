@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import HelpModal from "../components/HelpModal";
 const HomeStack = createStackNavigator();
 import Modal from "react-native-modal";
-
+import TutorialScreen from "./TutorialScreen";
 export default class HomeStackScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -49,11 +49,15 @@ export default class HomeStackScreen extends React.Component {
                 color="gray"
                 // onPress={this.toggleModal}
                 // modal画面を作りそこに遷移
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("tutorial1")}
               />
             ),
           }}
-          onPress={this.toggleModal}
+          //   onPress={this.toggleModal}
+        ></HomeStack.Screen>
+        <HomeStack.Screen
+          name="tutorial1"
+          component={TutorialScreen}
         ></HomeStack.Screen>
       </HomeStack.Navigator>
     );
