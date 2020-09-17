@@ -5,6 +5,7 @@ import { NavigationContainer, getFocusedRouteNameFromRoute } from "@react-naviga
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { twitter_id, setTwitterId } from "./src/Global.js";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import RecommendScreen from "./src/screens/RecommendScreen";
@@ -12,6 +13,9 @@ import ShelfScreen from "./src/screens/ShelfScreen";
 import StoreScreen from "./src/screens/StoreScreen";
 import RecommendStackScreen from './src/screens/RecommendStackScreen';
 import myBookStackScreen from './src/screens/myBookStackScreen';
+
+import LoginScreen from './src/screens/LoginScreen'
+
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 
