@@ -6,7 +6,7 @@ import {
   getFocusedRouteNameFromRoute,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import RecommendScreen from "./src/screens/RecommendScreen";
@@ -75,7 +75,7 @@ function TabScreen() {
 export default function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal">
+      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
         <RootStack.Screen
           name="Tab"
           component={TabScreen}
