@@ -1,4 +1,4 @@
-export let twitter_id = "";
+export let twitter_id = "dwwadamlkdfmwaklrakmralrma";
 export const setTwitterId = _v => {
     twitter_id = _v;
 };

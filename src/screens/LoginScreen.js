@@ -21,7 +21,7 @@ export default class LoginScreen extends React.Component {
     render() {
         return(
             <ApplicationProvider {...eva} theme={eva.light}>
-               <Layout>
+               <Layout style={{flex: 1, justifyContent: 'center', padding: 16}}>
                     <Input 
                         placeholder={"Twitter ID"}
                         onChangeText={(username) => this.setState({username})}
@@ -33,7 +33,7 @@ export default class LoginScreen extends React.Component {
                         value={this.state.password}
                     />
                     <Button onPress={() => this.loginAc()}>
-                        BUTTON
+                        Login
                     </Button>
                 </Layout>
             </ApplicationProvider>

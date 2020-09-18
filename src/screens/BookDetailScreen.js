@@ -9,12 +9,13 @@ import {
 } from "@ui-kitten/components";
 import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
-const twitterId = "dwwadamlkdfmwaklrakmralrma"
+import { twitter_id, setTwitterId } from "../Global.js";
 
 export default class BookDetailScreen extends React.Component {
 
   state = {
-    ownBooks: []
+    ownBooks: [],
+    user_id: 0,
   }
 
   renderImage(uri) {
@@ -28,13 +29,23 @@ export default class BookDetailScreen extends React.Component {
 
   constructor(props){
     super(props);
-    this.getOwnBooks = this.getOwnBooks.bind(this)
-    this.getOwnBooks(twitterId);
+    this.getUserId(twitter_id)
+    this.getOwnBooks(twitter_id);
   }
 
-  getOwnBooks(twitterId) {
+  getUserId(twitter_id) {
+    const url = "http://54.178.65.84:8080/user_by_twitter/"
+    fetch(url+twitter_id)
+    .then((response) => response.json())
+    .then((result) => {
+      this.setState({user_id: result.id})
+    })
+    .catch((error) => console.log(error))
+  }
+
+  getOwnBooks(twitter_id) {
     const url = "http://54.178.65.84:8080/book_by_twitter_id/"
-    fetch(url+twitterId)
+    fetch(url+twitter_id)
     .then((response) => response.json())
     .then((result) => {
       let getItems = []
@@ -44,6 +55,29 @@ export default class BookDetailScreen extends React.Component {
       this.setState({ownBooks: getItems})
     })
     .catch((error) => console.log(error))
+  }
+
+  buyBook(book) {
+    const data = {
+      "user_id": this.state.user_id,
+      "book_id": book.id
+    }
+    const param = {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+  }
+    const url = "http://54.178.65.84:8080/buy"
+
+    fetch(url, param)
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+
+    this.props.navigation.navigate('BookRead', {book: book, my: true})
   }
 
   renderButtons(book) {
@@ -71,7 +105,7 @@ export default class BookDetailScreen extends React.Component {
           <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book, my: false})}>
             サンプル
           </Button>
-          <Button onPress={() => {}}>
+          <Button onPress={() => this.buyBook(book)}>
             購入する
           </Button>
         </Layout>

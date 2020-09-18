@@ -18,6 +18,7 @@ import Icon5 from "react-native-vector-icons/FontAwesome5";
 import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
 import HelpModal from "../components/HelpModal";
+import RecommendButton from '../components/RecommendButton';
 
 export default class HomeScreen extends React.Component {
   _card = (el) => {
@@ -194,6 +195,7 @@ export default class HomeScreen extends React.Component {
             column={3}
           />
           {/* {modal} */}
+          <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Home"}})}/>
         </View>
       </ApplicationProvider>
     );
