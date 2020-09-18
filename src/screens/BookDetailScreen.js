@@ -9,7 +9,13 @@ import {
 } from "@ui-kitten/components";
 import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
+import { twitter_id, setTwitterId } from "../Global.js";
+
 export default class BookDetailScreen extends React.Component {
+
+  state = {
+    ownBooks: []
+  }
 
   renderImage(uri) {
     if (uri == null || uri == "") {
@@ -22,6 +28,55 @@ export default class BookDetailScreen extends React.Component {
 
   constructor(props){
     super(props);
+    this.getOwnBooks = this.getOwnBooks.bind(this)
+    this.getOwnBooks(twitter_id);
+  }
+
+  getOwnBooks(twitter_id) {
+    const url = "http://54.178.65.84:8080/book_by_twitter_id/"
+    fetch(url+twitter_id)
+    .then((response) => response.json())
+    .then((result) => {
+      let getItems = []
+      for (let i=0; i<result.quantity; i++) {
+        getItems.push(result.books[i])
+      }
+      this.setState({ownBooks: getItems})
+    })
+    .catch((error) => console.log(error))
+  }
+
+  renderButtons(book) {
+    // 本を持っているか確認
+    const some = this.state.ownBooks.some(
+      b => b.id === book.id &&
+           b.bookGroupId === book.bookGroupId && 
+           b.title === book.title &&
+           b.author === book.author &&
+           b.price === book.price &&
+           b.releaseDate === book.releaseDate &&
+           b.uri === book.uri
+    );
+    if (some) {
+      return (
+        <Layout style={styles.buttonContainer}>
+          <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book})}>
+            読む
+          </Button>
+        </Layout>
+      )
+    } else {
+      return (
+        <Layout style={styles.buttonContainer}>
+          <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book})}>
+            サンプル
+          </Button>
+          <Button onPress={() => {}}>
+            購入する
+          </Button>
+        </Layout>
+      )
+    }
   }
 
   render() {
@@ -31,17 +86,11 @@ export default class BookDetailScreen extends React.Component {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <Layout style={styles.container}>
-
           {this.renderImage(book.uri)}
           <Layout style={styles.bookTitle}>
             <Text style={{ fontSize: 32 }}>{book.title}</Text>
           </Layout>
-
-          <Layout style={styles.buttonContainer}>
-            <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book})}>サンプル</Button>
-
-            <Button onPress={() => {}}>購入する</Button>
-          </Layout>
+          {this.renderButtons(book)}
         </Layout>
       </ApplicationProvider>
     );

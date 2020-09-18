@@ -10,6 +10,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
 
+import { twitter_id, setTwitterId } from "./src/Global.js";
+
 import HomeScreen from "./src/screens/HomeScreen";
 import RecommendScreen from "./src/screens/RecommendScreen";
 import ShelfScreen from "./src/screens/ShelfScreen";
@@ -19,6 +21,7 @@ import RecommendStackScreen from "./src/screens/RecommendStackScreen";
 import BookDetailStackScreen from "./src/screens/BookDetailStackScreen";
 import HomeStackScreen from "./src/screens/HomeStackScreen";
 import TutorialScreen from "./src/screens/TutorialScreen";
+import LoginScreen from './src/screens/LoginScreen'
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -81,6 +84,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+        <RootStack.Screen
+          name='Login'
+          component={LoginScreen}
+        />
         <RootStack.Screen
           name="Tab"
           component={TabScreen}

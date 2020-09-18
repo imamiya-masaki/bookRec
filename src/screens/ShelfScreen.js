@@ -113,7 +113,7 @@ export default class ShelfScreen extends React.Component {
               <ScrollView horizontal showsVerticalScrollIndicator={false}>
                 {set}
               </ScrollView>
-              <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Home"}})}/>
+              <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Shelf"}})}/>
             </Layout>
           </ApplicationProvider>
         )
