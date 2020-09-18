@@ -60,7 +60,7 @@ export default class BookDetailScreen extends React.Component {
     if (some) {
       return (
         <Layout style={styles.buttonContainer}>
-          <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book})}>
+          <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book, my: true})}>
             読む
           </Button>
         </Layout>
@@ -68,7 +68,7 @@ export default class BookDetailScreen extends React.Component {
     } else {
       return (
         <Layout style={styles.buttonContainer}>
-          <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book})}>
+          <Button onPress={() => this.props.navigation.navigate('BookRead', {book: book, my: false})}>
             サンプル
           </Button>
           <Button onPress={() => {}}>
