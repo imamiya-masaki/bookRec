@@ -3,7 +3,7 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout } from '@ui-kitten/components';
 import { Image ,TouchableOpacity, StyleSheet, ScrollView } from 'react-native' ; 
 import RecommendButton from '../components/RecommendButton';
-
+import { user_id } from "../Global.js";
 export default class ShelfScreen extends React.Component {
   state = {books: []}
   static navigationOptions = {
@@ -22,12 +22,15 @@ export default class ShelfScreen extends React.Component {
     //   this.props.navigation.navigate('BookDetail', {selectedBook: data})
     // }
     componentDidMount () {
-        const url = "http://54.178.65.84:8080/book/";
+        ///users/{userid}/library
+        const url = "http://54.178.65.84:8080/users/" + user_id + "/library" 
+        // const url = "http://54.178.65.84:8080/book/";
         console.log('url', url)
         fetch(url)
         .then(res => res.json())
         .then(
-          (result) => {
+          (result1) => {
+            const result = result1.books
             // console.log('items', result)
             console.log('check', result[0].author)
             let getItems = []
