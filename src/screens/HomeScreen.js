@@ -18,7 +18,8 @@ import Icon5 from "react-native-vector-icons/FontAwesome5";
 import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
 import HelpModal from "../components/HelpModal";
-import RecommendButton from '../components/RecommendButton';
+import RecommendButton from "../components/RecommendButton";
+import { user_id } from "./src/Global.js";
 
 export default class HomeScreen extends React.Component {
   _card = (el) => {
@@ -44,7 +45,7 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     // const url = 'http://127.0.0.1:8080/book/'
-    const url = "http://54.178.65.84:8080/dashboard_info";
+    const url = `http://54.178.65.84:8080/dashboard_info/${user_id}`;
     fetch(url)
       .then((res) => res.json())
       .then(
@@ -63,8 +64,8 @@ export default class HomeScreen extends React.Component {
           });
         }
       );
-    const id = 0;
-    const userurl = `http://54.178.65.84:8080/users/:"${id}`;
+
+    const userurl = `http://54.178.65.84:8080/users/:"${user_id}`;
     console.log("url", userurl);
     fetch(userurl)
       .then((res) => res.json())
@@ -195,21 +196,28 @@ export default class HomeScreen extends React.Component {
             column={3}
           />
           {/* {modal} */}
-          <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Home"}})}/>
+          <RecommendButton
+            onPress={() =>
+              this.props.navigation.navigate("RecommendStack", {
+                screen: "SelectBook",
+                params: { root: "Home" },
+              })
+            }
+          />
         </View>
       </ApplicationProvider>
     );
   }
 }
 
-const items = [
-  { name: "recommend", background: "#3498db", icon: "user" },
-  { name: "recommended", background: "#3498db", icon: "user" },
-  { name: "reactions", background: "#3498db", icon: "heart" },
-  { name: "coupon", background: "#3498db", icon: "ticket" },
-  { name: "books", background: "#3498db", icon: "book" },
-  { name: "friends", background: "#3498db", icon: "group" },
-];
+// const items = [
+//   { name: "recommend", background: "#3498db", icon: "user" },
+//   { name: "recommended", background: "#3498db", icon: "user" },
+//   { name: "reactions", background: "#3498db", icon: "heart" },
+//   { name: "coupon", background: "#3498db", icon: "ticket" },
+//   { name: "books", background: "#3498db", icon: "book" },
+//   { name: "friends", background: "#3498db", icon: "group" },
+// ];
 
 const styles = StyleSheet.create({
   container: {
