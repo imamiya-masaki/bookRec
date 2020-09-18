@@ -3,7 +3,7 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text, Button } from '@ui-kitten/components';
 
 import RecommendBookComponent from '../components/recommendBookComponent'
-import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+import RecommendButton from '../components/RecommendButton';
 
 const MYUSERID = 1
 
@@ -45,8 +45,9 @@ export default class MyRecommendScreen extends React.Component {
         return (
             <ApplicationProvider {...eva} theme={eva.light}>
                 <Layout>
-                    <RecommendBookComponent　data={this.state.data} navDetail={(book) => this.props.navigation.navigate('BookDetail', { book: book }) }/>
+                    <RecommendBookComponent　data={this.state.data} navDetail={(book) => this.props.navigation.push('BookDetailStack', { screen: "BookDetail", params: {book: book }}) }/>
                 </Layout>
+                <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Recommend"}})}/>
             </ApplicationProvider>
         )
     }
