@@ -8,7 +8,10 @@ import {
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 
 import { twitter_id, setTwitterId } from "./src/Global.js";
 
@@ -21,7 +24,7 @@ import RecommendStackScreen from "./src/screens/RecommendStackScreen";
 import BookDetailStackScreen from "./src/screens/BookDetailStackScreen";
 import HomeStackScreen from "./src/screens/HomeStackScreen";
 import TutorialScreen from "./src/screens/TutorialScreen";
-import LoginScreen from './src/screens/LoginScreen'
+import LoginScreen from "./src/screens/LoginScreen";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -83,11 +86,8 @@ export default function App() {
   // render() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
-        <RootStack.Screen
-          name='Login'
-          component={LoginScreen}
-        />
+      <RootStack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
+        <RootStack.Screen name="Login" component={LoginScreen} />
         <RootStack.Screen
           name="Tab"
           component={TabScreen}
@@ -107,10 +107,11 @@ export default function App() {
           name="BookDetailStack"
           component={BookDetailStackScreen}
           options={({ route, navigation }) => ({
-             headerTitle: getHeaderTitle(route),
+            headerTitle: getHeaderTitle(route),
             headerLeft: (props) => (
-            <HeaderBackButton  onPress={() => navigation.goBack()} />
-          )})}
+              <HeaderBackButton onPress={() => navigation.goBack()} />
+            ),
+          })}
         />
         <RootStack.Screen
           name="StoreStack"
