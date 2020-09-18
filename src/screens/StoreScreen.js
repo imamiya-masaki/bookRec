@@ -80,7 +80,7 @@ export default class StoreScreen extends React.Component {
       if (item.uri == "") {
         itemSeparate[index].push(
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("BookDetail")}
+            onPress={() => this.props.navigation.navigate("BookDetailStack", {screen : "BookDetail", params :{ book: item}})}
           >
             <Image
               style={{
@@ -100,7 +100,7 @@ export default class StoreScreen extends React.Component {
       } else {
         itemSeparate[index].push(
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("BookDetail")}
+            onPress={() => this.props.navigation.navigate("BookDetailStack", {screen : "BookDetail", params :{ book: item}})}
           >
             <Image
               style={{
