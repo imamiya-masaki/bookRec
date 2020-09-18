@@ -13,6 +13,7 @@ import {
 import { ApplicationProvider, Layout } from "@ui-kitten/components";
 import Header from "../components/Header";
 import { ListItem, Button, Image } from "react-native-elements";
+import RecommendButton from '../components/RecommendButton';
 
 export default class StoreScreen extends React.Component {
   state = {
@@ -157,6 +158,8 @@ export default class StoreScreen extends React.Component {
             containerStyle={{ backgroundColor: "white", borderColor: "#fff" }}
           />
           <ScrollView showsVerticalScrollIndicator={false}>{Books}</ScrollView>
+        <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Home"}})}/>
+
         </SafeAreaView>
       </ApplicationProvider>
     );

@@ -19,6 +19,8 @@ import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
 import HelpModal from "../components/HelpModal";
 import { user_id, setUserId } from "../Global.js";
+import RecommendButton from "../components/RecommendButton";
+
 export default class HomeScreen extends React.Component {
   _card = (el) => {
     console.log("Card: " + el.name);
@@ -191,6 +193,14 @@ export default class HomeScreen extends React.Component {
             column={3}
           />
           {/* {modal} */}
+          <RecommendButton
+            onPress={() =>
+              this.props.navigation.navigate("RecommendStack", {
+                screen: "SelectBook",
+                params: { root: "Home" },
+              })
+            }
+          />
         </View>
       </ApplicationProvider>
     );
