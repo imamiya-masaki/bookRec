@@ -152,6 +152,15 @@ export default class HomeScreen extends React.Component {
           <ScrollView>
             <View style={{ marginTop: 0, width: "100%", alignSelf: "center" }}>
               <ListItem
+                title={user.name + "さんから本のおすすめが届きました。"}
+                leftIcon={<Icon5 name={"book"} size={20} color="skyblue" />}
+              />
+              <ListItem
+                title={user.name + "さんからリアクションが届きました。"}
+                leftIcon={<Icon5 name={"heart"} size={20} color="pink" />}
+                bottomDivider
+              />
+              <ListItem
                 title={user.name + "さんからリアクションが届きました。"}
                 leftIcon={<Icon5 name={"heart"} size={20} color="pink" />}
               />
@@ -216,6 +225,6 @@ const styles = StyleSheet.create({
 });
 
 const user = {
-  name: "○○",
+  name: "匿名",
   id: "xxx",
 };

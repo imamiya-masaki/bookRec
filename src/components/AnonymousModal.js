@@ -23,7 +23,7 @@ export default class AnonymousModal extends React.Component {
           flexDirection: "column",
         }}
       >
-        <Button title="匿名解除を希望する" />
+        <Button title={this.props.name} />
         <Button title="キャンセル" onPress={this.props.nav.toggleModal} />
       </View>
     );
