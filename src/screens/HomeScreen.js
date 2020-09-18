@@ -45,7 +45,7 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     // const url = 'http://127.0.0.1:8080/book/'
-    const url = "http://54.178.65.84:8080/dashboard_info";
+    const url = `http://54.178.65.84:8080/dashboard_info?id=${user_id}`;
     fetch(url)
       .then((res) => res.json())
       .then(
@@ -65,7 +65,7 @@ export default class HomeScreen extends React.Component {
         }
       );
 
-    const userurl = `http://54.178.65.84:8080/users/:"${user_id}`;
+    const userurl = `http://54.178.65.84:8080/users/${user_id}`;
     console.log("url", userurl);
     fetch(userurl)
       .then((res) => res.json())
@@ -97,11 +97,6 @@ export default class HomeScreen extends React.Component {
     } else {
       name = userinfo.username;
     }
-    if (items.Reactions == null) {
-      reactions = 0;
-    } else {
-      reactions = Reactions.length;
-    }
     const board = [
       {
         name: `Recommend
@@ -126,7 +121,7 @@ export default class HomeScreen extends React.Component {
         icon: "ticket",
       },
       {
-        name: `Books×${items.CouponCount}`,
+        name: `Books×${items.BookCount}`,
         background: "#3498db",
         icon: "book",
       },
@@ -207,14 +202,14 @@ export default class HomeScreen extends React.Component {
   }
 }
 
-const items = [
-  { name: "recommend", background: "#3498db", icon: "user" },
-  { name: "recommended", background: "#3498db", icon: "user" },
-  { name: "reactions", background: "#3498db", icon: "heart" },
-  { name: "coupon", background: "#3498db", icon: "ticket" },
-  { name: "books", background: "#3498db", icon: "book" },
-  { name: "friends", background: "#3498db", icon: "group" },
-];
+// const items = [
+//   { name: "recommend", background: "#3498db", icon: "user" },
+//   { name: "recommended", background: "#3498db", icon: "user" },
+//   { name: "reactions", background: "#3498db", icon: "heart" },
+//   { name: "coupon", background: "#3498db", icon: "ticket" },
+//   { name: "books", background: "#3498db", icon: "book" },
+//   { name: "friends", background: "#3498db", icon: "group" },
+// ];
 
 const styles = StyleSheet.create({
   container: {
