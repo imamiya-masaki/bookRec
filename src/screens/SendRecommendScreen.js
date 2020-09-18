@@ -13,6 +13,7 @@ import {
   Button,
   Text,
   Input,
+  Avatar,
 } from "@ui-kitten/components";
 import { twitter_id, setTwitterId } from "../Global.js";
 
@@ -24,11 +25,14 @@ export default class SelectRecommendScreen extends React.Component {
   state = {
     message: "",
     user_id: 0,
+    reactions: [],
+    selectedReaction: {} 
   };
 
   constructor(props){
     super(props);
     this.getUserId(twitter_id)
+    this.getReactions()
   }
 
   getUserId(twitter_id) {
@@ -48,7 +52,7 @@ export default class SelectRecommendScreen extends React.Component {
           SenderId: this.state.user_id,
           ReceiverId: selectedUsers[i].id,
           BookId: selectedBooks[j].id,
-          ReactionContentId: 1,
+          ReactionContentId: this.state.selectedReaction.Id,
         };
 
         const recommendParam = {
@@ -63,7 +67,6 @@ export default class SelectRecommendScreen extends React.Component {
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((error) => console.log(error));
-
         const messageData = {
           RecommendId: 1,
           Content: this.state.message,
@@ -78,13 +81,31 @@ export default class SelectRecommendScreen extends React.Component {
           body: JSON.stringify(messageData),
         };
 
-          fetch("http://54.178.65.84:8080/message", recommendParam)
+          fetch("http://54.178.65.84:8080/message", messageParam)
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((error) => console.log(error));
       }
     }
     this.props.navigation.navigate(root);
+  }
+
+  getReactions() {
+    const url = "http://54.178.65.84:8080/reaction/"
+    fetch(url)
+    .then((response) => response.json())
+    .then((result) => {
+      let getItems = []
+      for (let i=0; i<result.length; i++) {
+        getItems.push(result[i])
+      }
+      this.setState({reactions: getItems})
+    })
+    .catch((error) => console.log(error))
+  }
+
+  selectReaction(item) {
+    this.setState({selectReaction: item})
   }
 
   render() {
@@ -98,12 +119,34 @@ export default class SelectRecommendScreen extends React.Component {
             <RecommendBookList selectedBooks={selectedBooks} />
           </Layout>
 
-          <Layout style={{ paddingTop: 32 }}>
+          <Layout style={{ paddingTop: 16 }}>
             <Text style={styles.title}>おすすめするユーザー</Text>
             <RecommendUserList selectedUsers={selectedUsers} />
           </Layout>
 
-          <Layout style={{ flex: 1, paddingTop: 32 }}>
+          <Layout style={{ paddingTop: 16}}>
+            <Text style={styles.title}>リアクション</Text>
+            <FlatList
+            data={this.state.reactions}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableHighlight
+                style={{ flex: 1, paddingTop: 8 }}
+                onPress={() => this.selectReaction(item)}
+                underlayColor="transparent"
+              >
+                <Layout style={styles.reactionList}>
+                  {/* <Avatar size='giant' source={{uri: item.Uri}}/> */}
+                  {/* <Avatar size='giant' source={{uri: "https://res.cloudinary.com/teamb/image/upload/v1600394098/%E8%87%AA%E5%B7%B1%E5%95%93%E7%99%BA_yb7yeb.png"}}/> */}
+                  <Image style={{ width: 50, height: 80,resizeMode: 'contain' }} source={{uri: "https://res.cloudinary.com/teamb/image/upload/v1600394098/%E8%87%AA%E5%B7%B1%E5%95%93%E7%99%BA_yb7yeb.png"}} />
+                </Layout>
+
+              </TouchableHighlight>
+            )}
+          />
+          </Layout>
+
+          <Layout style={{ flex: 1, paddingTop: 8 }}>
             <Text style={styles.title}>メッセージ</Text>
             <Input
               style={{ paddingTop: 8 }}
@@ -132,4 +175,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
   },
+  reactionList: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 4
+},
 });
