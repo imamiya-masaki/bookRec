@@ -66,7 +66,7 @@ export default class TutorialScreen extends React.Component {
                 }}
                 source={require("../../assets/logo.png")}
               />
-              <Text style={styles.text}>ホーム画面の通知や</Text>
+              <Text style={styles.text}>ホ-ム画面の通知や</Text>
               <Text style={styles.text}>おすすめ画面から</Text>
               <Text style={styles.text}>おすすめした相手からの</Text>
               <Text style={styles.text}>返事をみることができます</Text>
@@ -85,7 +85,7 @@ export default class TutorialScreen extends React.Component {
               <Text style={styles.text}>もしくはおすすめを</Text>
               <Text style={styles.text}>くれた相手の匿名解除を</Text>
               <Text style={styles.text}>希望する時は</Text>
-              <Text style={styles.text}>トーク画面の右上</Text>
+              <Text style={styles.text}>おすすめ画面の右上</Text>
               <Text style={styles.text}>設定ボタンで行えます</Text>
             </View>
             <View style={styles.slide}>
