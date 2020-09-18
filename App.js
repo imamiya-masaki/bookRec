@@ -7,15 +7,16 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
+
 import HomeScreen from "./src/screens/HomeScreen";
 import RecommendScreen from "./src/screens/RecommendScreen";
-import ShelfStackScreen from "./src/screens/ShelfStackScreen";
+import ShelfScreen from "./src/screens/ShelfScreen";
 import StoreScreen from "./src/screens/StoreScreen";
 import StoreStackScreen from "./src/screens/StoreStackScreen";
 import RecommendStackScreen from "./src/screens/RecommendStackScreen";
-import myBookStackScreen from "./src/screens/myBookStackScreen";
+import BookDetailStackScreen from "./src/screens/BookDetailStackScreen";
 import HomeStackScreen from "./src/screens/HomeStackScreen";
 import TutorialScreen from "./src/screens/TutorialScreen";
 
@@ -55,7 +56,7 @@ function TabScreen() {
       />
       <Tab.Screen
         name="Shelf"
-        component={ShelfStackScreen}
+        component={ShelfScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="ios-book" color={color} size={size} />
@@ -79,7 +80,7 @@ export default function App() {
   // render() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal">
+      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
         <RootStack.Screen
           name="Tab"
           component={TabScreen}
@@ -96,9 +97,13 @@ export default function App() {
           }
         />
         <RootStack.Screen
-          name="myBookStack"
-          component={myBookStackScreen}
-          options={({ route }) => ({ headerTitle: getHeaderTitle(route) })}
+          name="BookDetailStack"
+          component={BookDetailStackScreen}
+          options={({ route, navigation }) => ({
+             headerTitle: getHeaderTitle(route),
+            headerLeft: (props) => (
+            <HeaderBackButton  onPress={() => navigation.goBack()} />
+          )})}
         />
         <RootStack.Screen
           name="StoreStack"

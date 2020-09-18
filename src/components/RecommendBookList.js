@@ -12,7 +12,7 @@ export default class RecommendBookList extends React.Component {
             return (
                 <Image 
                     style={styles.image}
-                    source={{uri:uri}}
+                    source={{uri:item.uri}}
                 />
             )
         } else {

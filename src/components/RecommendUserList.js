@@ -3,35 +3,23 @@ import {StyleSheet, FlatList, Image } from "react-native";
 import {
     Layout,
     Text,
+    Avatar
 } from "@ui-kitten/components";
 
 export default class RecommendUserList extends React.Component {
-
-    renderImage(item) {
-        if (item.uri) {
-            return (
-                <Image 
-                    style={styles.image}
-                    source={{uri:uri}}
-                />
-            )
-        } else {
-            return (
-                <Image 
-                    style={styles.image}
-                    source={require('../../assets/noimage.jpg')}
-                />
-            )
-        }
-    }
 
     renderBook({item}) {
         const uri = item.uri ? item.uri : "https://i.imgur.com/v2pLOgS.jpg"
         return (
             <Layout style={styles.userList}>
-                {this.renderImage(item)}
+                <Avatar
+                    size="large"
+                    title="Icon"
+                    rounded
+                    source={require("../../assets/unknown-person-icon-4.png")}
+                />
                 <Text>
-                    {item.name}
+                    {item.username}
                 </Text>
             </Layout>
         )

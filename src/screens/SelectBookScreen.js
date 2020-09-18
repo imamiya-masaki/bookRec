@@ -2,7 +2,6 @@ import React from "react";
 import {
   StyleSheet,
   FlatList,
-  View,
   Image,
   TouchableHighlight,
 } from "react-native";
@@ -26,14 +25,14 @@ export default class SelectBookScreen extends React.Component {
   };
 
   componentDidMount() {
-    const url = "http://127.0.0.1:8080/book/";
-    // const url = "http://54.178.65.84:8080/book/";
+    const url = "http://54.178.65.84:8080/book/";
     fetch(url)
       .then((res) => res.json())
       .then((result) => {
         let getItems = [];
         for (let i = 0; i < result.length; i++) {
-          getItems.push(result[i]);
+            if (!result[i].title == "" && !result[i].author == "")
+                getItems.push(result[i]);
         }
         this.setState({
           items: getItems,
@@ -53,6 +52,10 @@ export default class SelectBookScreen extends React.Component {
       this.setState({
         selectedBooks: this.state.selectedBooks.concat(item),
       });
+    } else {
+        this.setState({
+            selectedBooks: this.state.selectedBooks.filter(books => books !== item)
+        })
     }
   }
 
@@ -70,7 +73,7 @@ export default class SelectBookScreen extends React.Component {
   renderImage(item) {
     if (item.uri) {
       return (
-        <Image style={{ width: 100, height: 160 }} source={{ uri: uri }} />
+        <Image style={{ width: 100, height: 160 }} source={{ uri: item.uri }} />
       );
     } else {
       return (
