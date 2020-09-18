@@ -18,7 +18,8 @@ import Icon5 from "react-native-vector-icons/FontAwesome5";
 import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
 import HelpModal from "../components/HelpModal";
-import RecommendButton from '../components/RecommendButton';
+import { user_id, setUserId } from "../Global.js";
+import RecommendButton from "../components/RecommendButton";
 
 export default class HomeScreen extends React.Component {
   _card = (el) => {
@@ -63,8 +64,8 @@ export default class HomeScreen extends React.Component {
           });
         }
       );
-    const id = 0;
-    const userurl = `http://54.178.65.84:8080/users/:"${id}`;
+
+    const userurl = `http://54.178.65.84:8080/users/:"${user_id}`;
     console.log("url", userurl);
     fetch(userurl)
       .then((res) => res.json())
@@ -134,14 +135,6 @@ export default class HomeScreen extends React.Component {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "#eee" }}>
-          {/* <Header name="ホーム" /> */}
-          <Icon
-            style={{ position: "absolute", right: 20, top: 20 }}
-            name="question"
-            size={30}
-            color="gray"
-            onPress={() => this.props.navigation.navigate("tutorial")} //だめ
-          ></Icon>
           <View
             style={{
               marginTop: 20,
@@ -161,12 +154,17 @@ export default class HomeScreen extends React.Component {
           <ScrollView>
             <View style={{ marginTop: 0, width: "100%", alignSelf: "center" }}>
               <ListItem
-                title={user.name + "さんからリアクションが届きました。"}
-                leftIcon={<Icon5 name={"heart"} size={20} color="pink" />}
+                title={user.name + "さんから本のおすすめが届きました。"}
+                leftIcon={<Icon5 name={"book"} size={20} color="skyblue" />}
+              />
+              <ListItem
+                title={user.name + "さんから本のおすすめが届きました。"}
+                leftIcon={<Icon5 name={"book"} size={20} color="skyblue" />}
               />
               <ListItem
                 title={user.name + "さんからリアクションが届きました。"}
-                leftIcon={<Icon5 name={"laugh"} size={20} color="pink" />}
+                leftIcon={<Icon5 name={"heart"} size={20} color="pink" />}
+                bottomDivider
               />
               <ListItem
                 title={user.name + "さんから本のおすすめが届きました。"}
@@ -195,7 +193,14 @@ export default class HomeScreen extends React.Component {
             column={3}
           />
           {/* {modal} */}
-          <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Home"}})}/>
+          <RecommendButton
+            onPress={() =>
+              this.props.navigation.navigate("RecommendStack", {
+                screen: "SelectBook",
+                params: { root: "Home" },
+              })
+            }
+          />
         </View>
       </ApplicationProvider>
     );
@@ -226,6 +231,6 @@ const styles = StyleSheet.create({
 });
 
 const user = {
-  name: "○○",
+  name: "匿名",
   id: "xxx",
 };
