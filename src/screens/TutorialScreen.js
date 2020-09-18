@@ -113,7 +113,7 @@ export default class TutorialScreen extends React.Component {
               />
               <Button
                 title="Start"
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.replace("Home")}
               ></Button>
             </View>
           </Swiper>

@@ -31,6 +31,10 @@ export default class HomeStackScreen extends React.Component {
     return (
       <HomeStack.Navigator>
         <HomeStack.Screen
+          name="tutorial1"
+          component={TutorialScreen}
+        ></HomeStack.Screen>
+        <HomeStack.Screen
           name="Home"
           component={HomeScreen}
           options={{
@@ -54,10 +58,6 @@ export default class HomeStackScreen extends React.Component {
             ),
           }}
           //   onPress={this.toggleModal}
-        ></HomeStack.Screen>
-        <HomeStack.Screen
-          name="tutorial1"
-          component={TutorialScreen}
         ></HomeStack.Screen>
       </HomeStack.Navigator>
     );
