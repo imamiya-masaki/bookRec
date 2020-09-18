@@ -18,7 +18,7 @@ import Icon5 from "react-native-vector-icons/FontAwesome5";
 import AnonymousModal from "../components/AnonymousModal";
 import Modal from "react-native-modal";
 import HelpModal from "../components/HelpModal";
-
+import { user_id, setUserId } from "../Global.js";
 export default class HomeScreen extends React.Component {
   _card = (el) => {
     console.log("Card: " + el.name);
@@ -62,8 +62,8 @@ export default class HomeScreen extends React.Component {
           });
         }
       );
-    const id = 0;
-    const userurl = `http://54.178.65.84:8080/users/:"${id}`;
+
+    const userurl = `http://54.178.65.84:8080/users/:"${user_id}`;
     console.log("url", userurl);
     fetch(userurl)
       .then((res) => res.json())
@@ -133,14 +133,6 @@ export default class HomeScreen extends React.Component {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "#eee" }}>
-          {/* <Header name="ホーム" /> */}
-          <Icon
-            style={{ position: "absolute", right: 20, top: 20 }}
-            name="question"
-            size={30}
-            color="gray"
-            onPress={() => this.props.navigation.navigate("tutorial")} //だめ
-          ></Icon>
           <View
             style={{
               marginTop: 20,

@@ -106,6 +106,3 @@ const styles = StyleSheet.create({
     height: 160,
   },
 });
-
-// 0:
-// 1:匿名解除する
