@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text,Card} from '@ui-kitten/components';
-import axios from 'axios';
-import {Image, Button,TouchableOpacity, StyleSheet} from 'react-native' ; 
-import Header from "../components/Header";
-import BookDetailScreen from './BookDetailScreen';
-// import Navigation from 'react-native-navigation';
-import createStackNavigator from '@react-navigation/stack';
-// const BookShelf = () => {
-//     let bookShelf = []
+import { ApplicationProvider, Layout } from '@ui-kitten/components';
+import { Image ,TouchableOpacity, StyleSheet, ScrollView } from 'react-native' ; 
+import RecommendButton from '../components/RecommendButton';
 
-// }
 export default class ShelfScreen extends React.Component {
   state = {books: []}
   static navigationOptions = {
@@ -29,7 +22,7 @@ export default class ShelfScreen extends React.Component {
     //   this.props.navigation.navigate('BookDetail', {selectedBook: data})
     // }
     componentDidMount () {
-        const url = 'http://127.0.0.1:8080/book/'
+        const url = "http://54.178.65.84:8080/book/";
         console.log('url', url)
         fetch(url)
         .then(res => res.json())
@@ -38,8 +31,9 @@ export default class ShelfScreen extends React.Component {
             // console.log('items', result)
             console.log('check', result[0].author)
             let getItems = []
-            for (let i= 0; i<result.length; i++) {
-              getItems.push(result[i])
+            for (let i = 0; i < result.length; i++) {
+              if (!result[i].title == "" && !result[i].author == "")
+                  getItems.push(result[i]);
             }
             this.setState({
               isLoaded: true,
@@ -72,16 +66,16 @@ export default class ShelfScreen extends React.Component {
       let itemSeparaite = [[]]
       let index = 0
       for (let item of items) {
-        if (itemSeparaite[index].length >=4) {
+        if (itemSeparaite[index].length >=5) {
           index += 1
         }
         let itemImage = "https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg"
-        if (itemSeparaite[index].hasOwnProperty('uri') && itemSeparaite[index].uri.length > 0) {
-          itemImage = itemSeparaite[index].uri
+        if (item.hasOwnProperty('uri') && item.uri.length > 0) {
+          itemImage = item.uri
         }
         itemSeparaite[index].push(
           <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('BookDetail', {book: item})}}>
+            onPress={() => {this.props.navigation.navigate('BookDetailStack',{screen : "BookDetail", params: {book: item}} )}}>
           <Image
               style={styles.book_image}
               source={{
@@ -93,23 +87,42 @@ export default class ShelfScreen extends React.Component {
       }
         let set = []
         for (let i = 0; i<=index; i++){
-          set.push(<Layout style={{flexDirection: 'row', paddingBottom:10, borderBottomWidth: 1 }}>
-            {itemSeparaite[i]}
-          </Layout>)
+          set.push(
+            <Layout style={{
+              flexDirection: 'row',
+              padding:8,
+              borderBottomWidth: 16,
+              borderBottomColor: "#371b0c",
+              backgroundColor: "#742909"
+            }}>
+              {itemSeparaite[i]}
+            </Layout>)
         }
         return (
-            <ApplicationProvider {...eva} theme={eva.light}>
-                <Layout style={{flex: 1, paddingTop:30}}>
-                  {set}
-                </Layout>
-            </ApplicationProvider>
+          <ApplicationProvider {...eva} theme={eva.light}>
+            <Layout style={{flex: 1, paddingTop:30, backgroundColor: "#742909"}}>
+              <ScrollView horizontal showsVerticalScrollIndicator={false}>
+                {set}
+              </ScrollView>
+              <ScrollView horizontal showsVerticalScrollIndicator={false}>
+                {set}
+              </ScrollView>
+              <ScrollView horizontal showsVerticalScrollIndicator={false}>
+                {set}
+              </ScrollView>
+              <ScrollView horizontal showsVerticalScrollIndicator={false}>
+                {set}
+              </ScrollView>
+              <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Home"}})}/>
+            </Layout>
+          </ApplicationProvider>
         )
     }
 }
 const styles = StyleSheet.create({
   book_image: {
       marginLeft: 15,
-      width: 80,
-      height: 120
+      width: 100,
+      height: 150,
   }
 });
