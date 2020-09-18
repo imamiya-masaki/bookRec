@@ -9,7 +9,7 @@ import {
 } from "@ui-kitten/components";
 import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
-const twitterId = "dwwadamlkdfmwaklrakmralrma"
+import { twitter_id, setTwitterId } from "../Global.js";
 
 export default class BookDetailScreen extends React.Component {
 
@@ -29,12 +29,12 @@ export default class BookDetailScreen extends React.Component {
   constructor(props){
     super(props);
     this.getOwnBooks = this.getOwnBooks.bind(this)
-    this.getOwnBooks(twitterId);
+    this.getOwnBooks(twitter_id);
   }
 
-  getOwnBooks(twitterId) {
+  getOwnBooks(twitter_id) {
     const url = "http://54.178.65.84:8080/book_by_twitter_id/"
-    fetch(url+twitterId)
+    fetch(url+twitter_id)
     .then((response) => response.json())
     .then((result) => {
       let getItems = []
