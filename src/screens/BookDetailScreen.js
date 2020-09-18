@@ -9,12 +9,13 @@ import {
 } from "@ui-kitten/components";
 import BootstrapStyleSheet from "react-native-bootstrap-styles";
 
-import { twitter_id, setTwitterId, user_id } from "../Global.js";
+import { twitter_id, setTwitterId } from "../Global.js";
 
 export default class BookDetailScreen extends React.Component {
 
   state = {
-    ownBooks: []
+    ownBooks: [],
+    user_id: 0,
   }
 
   renderImage(uri) {
@@ -28,8 +29,18 @@ export default class BookDetailScreen extends React.Component {
 
   constructor(props){
     super(props);
-    this.getOwnBooks = this.getOwnBooks.bind(this)
+    this.getUserId(twitter_id)
     this.getOwnBooks(twitter_id);
+  }
+
+  getUserId(twitter_id) {
+    const url = "http://54.178.65.84:8080/user_by_twitter/"
+    fetch(url+twitter_id)
+    .then((response) => response.json())
+    .then((result) => {
+      this.setState({user_id: result.id})
+    })
+    .catch((error) => console.log(error))
   }
 
   getOwnBooks(twitter_id) {
@@ -48,7 +59,7 @@ export default class BookDetailScreen extends React.Component {
 
   buyBook(book) {
     const data = {
-      "user_id": user_id,
+      "user_id": this.state.user_id,
       "book_id": book.id
     }
     const param = {
