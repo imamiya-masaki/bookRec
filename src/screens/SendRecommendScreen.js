@@ -114,6 +114,7 @@ export default class SelectRecommendScreen extends React.Component {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <Layout style={styles.container}>
+
           <Layout>
             <Text style={styles.title}>おすすめする本</Text>
             <RecommendBookList selectedBooks={selectedBooks} />
@@ -124,10 +125,21 @@ export default class SelectRecommendScreen extends React.Component {
             <RecommendUserList selectedUsers={selectedUsers} />
           </Layout>
 
-          <Layout style={{ paddingTop: 16}}>
+          <Layout>
+            <Text style={styles.title}>メッセージ</Text>
+            <Input
+              style={{ paddingTop: 8 }}
+              placeholder="メッセージを入力"
+              onChangeText={(text) => this.setState({ message: text })}
+              multiline
+            />
+          </Layout>
+
+          <Layout style={{flex: 1, paddingTop: 8}}>
             <Text style={styles.title}>リアクション</Text>
             <FlatList
             data={this.state.reactions}
+            horizontal={true}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TouchableHighlight
@@ -135,7 +147,7 @@ export default class SelectRecommendScreen extends React.Component {
                 onPress={() => this.selectReaction(item)}
                 underlayColor="transparent"
               >
-                <Layout style={styles.reactionList}>
+                <Layout>
                   {/* <Avatar size='giant' source={{uri: item.Uri}}/> */}
                   {/* <Avatar size='giant' source={{uri: "https://res.cloudinary.com/teamb/image/upload/v1600394098/%E8%87%AA%E5%B7%B1%E5%95%93%E7%99%BA_yb7yeb.png"}}/> */}
                   <Image style={{ width: 50, height: 80,resizeMode: 'contain' }} source={{uri: "https://res.cloudinary.com/teamb/image/upload/v1600394098/%E8%87%AA%E5%B7%B1%E5%95%93%E7%99%BA_yb7yeb.png"}} />
@@ -146,21 +158,12 @@ export default class SelectRecommendScreen extends React.Component {
           />
           </Layout>
 
-          <Layout style={{ flex: 1, paddingTop: 8 }}>
-            <Text style={styles.title}>メッセージ</Text>
-            <Input
-              style={{ paddingTop: 8 }}
-              placeholder="メッセージを入力"
-              onChangeText={(text) => this.setState({ message: text })}
-              multiline
-            />
-          </Layout>
-
           <Button
             onPress={() => this.pressSend(root, selectedBooks, selectedUsers)}
           >
             送信する
           </Button>
+
         </Layout>
       </ApplicationProvider>
     );
@@ -177,7 +180,6 @@ const styles = StyleSheet.create({
   },
   reactionList: {
     flex: 1,
-    flexDirection: 'row',
-    padding: 4
+    padding: 4 
 },
 });
