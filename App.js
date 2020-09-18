@@ -25,7 +25,7 @@ import BookDetailStackScreen from "./src/screens/BookDetailStackScreen";
 import HomeStackScreen from "./src/screens/HomeStackScreen";
 import TutorialScreen from "./src/screens/TutorialScreen";
 import LoginScreen from "./src/screens/LoginScreen";
-
+console.disableYellowBox = true
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 
