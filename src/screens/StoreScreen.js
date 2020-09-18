@@ -140,15 +140,12 @@ export default class StoreScreen extends React.Component {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-          {/* <Header name="ストア" /> */}
-          {/*  現状置物 */}
           <SearchBar
             placeholder="本を探す..."
             onChangeText={this.updateSearch}
             value={search}
             containerStyle={{ backgroundColor: "white", borderColor: "#fff" }}
           />
-          {/* </View> */}
           <ScrollView showsVerticalScrollIndicator={false}>{Books}</ScrollView>
         </SafeAreaView>
       </ApplicationProvider>
