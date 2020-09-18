@@ -14,6 +14,8 @@ import {
   Text,
   Input,
 } from "@ui-kitten/components";
+import { twitter_id, setTwitterId } from "../Global.js";
+
 
 import RecommendBookList from "../components/RecommendBookList";
 import RecommendUserList from "../components/RecommendUserList";
@@ -21,13 +23,29 @@ import RecommendUserList from "../components/RecommendUserList";
 export default class SelectRecommendScreen extends React.Component {
   state = {
     message: "",
+    user_id: 0,
   };
+
+  constructor(props){
+    super(props);
+    this.getUserId(twitter_id)
+  }
+
+  getUserId(twitter_id) {
+    const url = "http://54.178.65.84:8080/user_by_twitter/"
+    fetch(url+twitter_id)
+    .then((response) => response.json())
+    .then((result) => {
+      this.setState({user_id: result.id})
+    })
+    .catch((error) => console.log(error))
+  }
 
   pressSend(root, selectedBooks, selectedUsers) {
     for (let i = 0; i < selectedUsers.length; i++) {
       for (let j = 0; j < selectedBooks.length; j++) {
         const recommendData = {
-          SenderId: 1,
+          SenderId: this.state.user_id,
           ReceiverId: selectedUsers[i].id,
           BookId: selectedBooks[j].id,
           ReactionContentId: 1,
@@ -41,8 +59,7 @@ export default class SelectRecommendScreen extends React.Component {
           },
           body: JSON.stringify(recommendData),
         };
-        fetch("http://127.0.0.1:8080/recommend", recommendParam)
-          // fetch("http://54.178.65.84:8080/recommend", recommendParam)
+        fetch("http://54.178.65.84:8080/recommend", recommendParam)
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((error) => console.log(error));
@@ -61,8 +78,7 @@ export default class SelectRecommendScreen extends React.Component {
           body: JSON.stringify(messageData),
         };
 
-        fetch("http://127.0.0.1:8080/message", messageParam)
-          // fetch("http://54.178.65.84:8080/message", recommendParam)
+          fetch("http://54.178.65.84:8080/message", recommendParam)
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((error) => console.log(error));
