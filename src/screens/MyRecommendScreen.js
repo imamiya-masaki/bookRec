@@ -7,8 +7,9 @@ import {
   Button,
 } from "@ui-kitten/components";
 
-import RecommendBookComponent from "../components/recommendBookComponent";
-import { get } from "react-native/Libraries/Utilities/PixelRatio";
+
+import RecommendBookComponent from '../components/recommendBookComponent'
+import RecommendButton from '../components/RecommendButton';
 
 const MYUSERID = 1;
 
@@ -44,20 +45,15 @@ export default class MyRecommendScreen extends React.Component {
         console.error(error);
       });
   }
-
-  render() {
-    return (
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <Layout>
-          <RecommendBookComponent
-            data={this.state.data}
-            navDetail={(book) =>
-              this.props.navigation.navigate("BookDetail", { book: book })
-            }
-            name="MyRecommend"
-          />
-        </Layout>
-      </ApplicationProvider>
-    );
-  }
+    render() {        
+        return (
+            <ApplicationProvider {...eva} theme={eva.light}>
+                <Layout>
+                    <RecommendBookComponent　data={this.state.data} navDetail={(book) => this.props.navigation.push('BookDetailStack', { screen: "BookDetail", params: {book: book }})　name="MyRecommend" }/>
+                </Layout>
+                <RecommendButton onPress={() => this.props.navigation.navigate("RecommendStack", {screen: "SelectBook", params: {root: "Recommend"}})}/>
+            </ApplicationProvider>
+        )
+    }
 }
+

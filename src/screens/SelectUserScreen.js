@@ -7,6 +7,7 @@ import {
     Button,
     Text,
     Input,
+    Avatar
 } from "@ui-kitten/components";
 
 import RecommendBookList from '../components/RecommendBookList';
@@ -17,51 +18,38 @@ export default class SelectUserScreen extends React.Component {
     state = {
         userName: "",
         users: [],
-        items: [
-            {
-                id: 1,
-                name: "taro",
-            },
-            {
-                id: 2,
-                name: "jiro",
-            },
-            {
-                id: 3,
-                name: "sanro",
-            }
-        ],
+        items: [],
         selectedUsers: [],
     }
 
     componentDidMount() {
-        this.setState({users: this.state.items})
+        const url = "http://54.178.65.84:8080/users/";
+        fetch(url)
+        .then((res) => res.json())
+        .then((result) => {
+        let getItems = [];
+        for (let i = 0; i < result.count; i++) {
+            getItems.push(result.users[i]);
+        }
+        this.setState({
+            items: getItems,
+            users: getItems,
+        });
+        })
+        .catch((error) => {
+        console.log(error);
+        });
     }
-
 
     addSelectedItem(item) {
         if (this.state.selectedUsers != null && !this.state.selectedUsers.includes(item)) {
             this.setState({
                 selectedUsers: this.state.selectedUsers.concat(item)
             })
-        }
-    }
-
-    renderImage(item) {
-        if (item.uri) {
-            return (
-                <Image 
-                    style={{ width: 100, height: 160 }}
-                    source={{uri:uri}}
-                />
-            )
         } else {
-            return (
-                <Image 
-                    style={{ width: 100, height: 160 }}
-                    source={require('../../assets/noimage.jpg')}
-                />
-            )
+            this.setState({
+                selectedUsers: this.state.selectedUsers.filter(users => users !== item)
+            })
         }
     }
 
@@ -69,7 +57,7 @@ export default class SelectUserScreen extends React.Component {
         if (userName == "") {
             this.setState({users: this.state.items})
         } else {
-            let hitUsers = this.state.items.filter(item => item.name.includes(userName))
+            let hitUsers = this.state.items.filter(item => item.username.includes(userName))
             this.setState({users: hitUsers})
         }
     }
@@ -102,10 +90,15 @@ export default class SelectUserScreen extends React.Component {
                                 underlayColor='transparent'
                             >
                                 <Layout style={styles.userInfo}>  
-                                    {this.renderImage(item)}
+                                    <Avatar
+                                        size="large"
+                                        title="Icon"
+                                        rounded
+                                        source={require("../../assets/unknown-person-icon-4.png")}
+                                    />
                                     <Layout>
                                         <Text style={{padding: 16, fontSize: 24}}>
-                                            {item.name}
+                                            {item.username}
                                         </Text>
                                     </Layout>
                                 </Layout>
@@ -129,7 +122,6 @@ export default class SelectUserScreen extends React.Component {
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {

@@ -62,7 +62,8 @@ export default class HomeScreen extends React.Component {
           });
         }
       );
-    const userurl = "http://54.178.65.84:8080/users/:0";
+    const id = 0;
+    const userurl = `http://54.178.65.84:8080/users/:"${id}`;
     console.log("url", userurl);
     fetch(userurl)
       .then((res) => res.json())
@@ -133,6 +134,13 @@ export default class HomeScreen extends React.Component {
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "#eee" }}>
           {/* <Header name="ホーム" /> */}
+          <Icon
+            style={{ position: "absolute", right: 20, top: 20 }}
+            name="question"
+            size={30}
+            color="gray"
+            onPress={() => this.props.navigation.navigate("tutorial")} //だめ
+          ></Icon>
           <View
             style={{
               marginTop: 20,
@@ -156,17 +164,13 @@ export default class HomeScreen extends React.Component {
                 leftIcon={<Icon5 name={"book"} size={20} color="skyblue" />}
               />
               <ListItem
+                title={user.name + "さんから本のおすすめが届きました。"}
+                leftIcon={<Icon5 name={"book"} size={20} color="skyblue" />}
+              />
+              <ListItem
                 title={user.name + "さんからリアクションが届きました。"}
                 leftIcon={<Icon5 name={"heart"} size={20} color="pink" />}
                 bottomDivider
-              />
-              <ListItem
-                title={user.name + "さんからリアクションが届きました。"}
-                leftIcon={<Icon5 name={"heart"} size={20} color="pink" />}
-              />
-              <ListItem
-                title={user.name + "さんからリアクションが届きました。"}
-                leftIcon={<Icon5 name={"laugh"} size={20} color="pink" />}
               />
               <ListItem
                 title={user.name + "さんから本のおすすめが届きました。"}

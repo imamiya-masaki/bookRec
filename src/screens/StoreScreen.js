@@ -80,7 +80,12 @@ export default class StoreScreen extends React.Component {
       if (item.uri == "") {
         itemSeparate[index].push(
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("BookDetail")}
+            onPress={() =>
+              this.props.navigation.navigate("BookDetailStack", {
+                screen: "BookDetail",
+                params: { book: item },
+              })
+            }
           >
             <Image
               style={{
@@ -100,7 +105,12 @@ export default class StoreScreen extends React.Component {
       } else {
         itemSeparate[index].push(
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("BookDetail")}
+            onPress={() =>
+              this.props.navigation.navigate("BookDetailStack", {
+                screen: "BookDetail",
+                params: { book: item },
+              })
+            }
           >
             <Image
               style={{
@@ -128,7 +138,7 @@ export default class StoreScreen extends React.Component {
               title={label[i]}
               bottomDivider
               chevron
-              onPress={() => alert("詳細")}
+              // onPress={() => alert("詳細")}
             />
           </View>
           <ScrollView horizontal showsVerticalScrollIndicator={false}>
@@ -140,15 +150,12 @@ export default class StoreScreen extends React.Component {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-          {/* <Header name="ストア" /> */}
-          {/*  現状置物 */}
           <SearchBar
             placeholder="本を探す..."
             onChangeText={this.updateSearch}
             value={search}
             containerStyle={{ backgroundColor: "white", borderColor: "#fff" }}
           />
-          {/* </View> */}
           <ScrollView showsVerticalScrollIndicator={false}>{Books}</ScrollView>
         </SafeAreaView>
       </ApplicationProvider>
