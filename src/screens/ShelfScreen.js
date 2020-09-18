@@ -66,7 +66,7 @@ export default class ShelfScreen extends React.Component {
       let itemSeparaite = [[]]
       let index = 0
       for (let item of items) {
-        if (itemSeparaite[index].length >=5) {
+        if (itemSeparaite[index].length >=items.length) {
           index += 1
         }
         let itemImage = "https://res.cloudinary.com/teamb/image/upload/v1600318026/noimage_jj1ubq.jpg"
