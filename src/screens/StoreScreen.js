@@ -75,7 +75,7 @@ export default class StoreScreen extends React.Component {
       "雑誌おすすめ",
     ]; // 本当はlabelに合わせた処理をするけど今回はストアにはこらないので
     for (let item of items) {
-      if (itemSeparate[index].length >= 5) {
+      if (itemSeparate[index].length >= items.length) {
         index += 1;
       }
       if (item.uri == "") {
